@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Continents | The Covid-19 App</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>
+            <h1 th:text="${continent}"></h1>
+            <table>
+                <tr>
+                    <th>Country</th>
+                    <th>Total Cases</th>
+                    <th>New Cases</th>
+                    <th>Total Deaths</th>
+                </tr>
+                <tr th:each="countryTotal : ${countryTotals}">
+                    <td>
+                        <a th:href="@{/continents/{continent}/countries/{country}(continent=${continent}, country=${countryTotal.country})}">
+                            <span th:text="${countryTotal.country}"/>
+                        </a>
+                    </td>
+                    <td th:text="${countryTotal.cases}"></td>
+                    <td th:text="${countryTotal.todayCases}">0</td>
+                    <td th:text="${countryTotal.deaths}">0</td>
+                </tr>
+            </table>
+
+        </div>
+    </body>
+</html>
