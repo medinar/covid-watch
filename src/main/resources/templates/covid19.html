@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>
+            <h1>Coronavirus Cases:</h1>
+            <h3 th:text="${cases}"></h3>
+            
+            <h1>Deaths:</h1>
+            <h3 th:text="${deaths}"></h3>
+            
+            <h1>Recovered:</h1>
+            <h3 th:text="${recovered}"></h3>
+            
+        </div>
+    </body>
+</html>
