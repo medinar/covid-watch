@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div>
+        <section id="main">
             <h1>Coronavirus Cases:</h1>
             <h3 th:text="${cases}"></h3>
             
@@ -16,6 +16,37 @@
             <h1>Recovered:</h1>
             <h3 th:text="${recovered}"></h3>
             
-        </div>
+        </section>
+        <hr>
+        <section>
+            <h1>Active Cases:</h1>
+            <h3 th:text="${active}"></h3>
+
+            <h1>Closed Cases:</h1>
+            <h3 th:text="${closed}"></h3>
+        </section>
+        
+        <hr>
+        <section>
+            <h1>Total Reported Cases in each Continent</h1>
+            <table class="table">
+                <tr>
+                    <th>Continent</th>
+                    <th>Total Cases</th>
+                    <th>New Cases</th>
+                    <th>Total Deaths</th>
+                </tr>
+                <tr th:each="continentalTotal : ${continentalTotals}">
+                    <td>
+                        <a th:href="@{/continents/{continent}/countries(continent=${continentalTotal.continent})}">
+                            <span th:text="${continentalTotal.continent}"/>
+                        </a>
+                    </td>
+                    <td th:text="${continentalTotal.cases}"></td>
+                    <td th:text="${continentalTotal.todayCases}">0</td>
+                    <td th:text="${continentalTotal.deaths}">0</td>
+                </tr>
+            </table>
+        </section>
     </body>
 </html>
