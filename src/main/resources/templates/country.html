@@ -64,18 +64,41 @@
         <hr>
         <section>
             <div>
-                <h6>Percentage of Active Case</h6>
-                <h2 th:text=""></h2>
+                <h6>Active Cases %</h6>
+                <h1 th:text="${activePercentage}"></h1>
+                <br>
+                <h6>Total Active Cases</h6>
+                <h1 th:text="${active}"></h1>
+                <br>
+                <h6>Recoveries %</h6>
+                <h1 th:text="${recoveredPercentage}"></h1>
+                <br>
+                <h6>Total Recoveries</h6>
+                <h1 th:text="${recovered}"></h1>
+                <br>
+                <h6>Deaths %</h6>
+                <h1 th:text="${deathPercentage}"></h1>
+                <br>
+                <h6>Total Deaths</h6>
+                <h1 th:text="${deaths}"></h1>
+                
+                <br>
+                <h6>New Cases</h6>
+                <h1 th:text="${todayCases}"></h1>
+                <br>
+                <h6>New Recoveries</h6>
+                <h1 th:text="${todayRecovered}"></h1>
+                <br>
+                <h6>New Deaths</h6>
+                <h1 th:text="${todayDeaths}"></h1>
             </div>
         </section>
         
         <hr>
         <section>
-            <h1>Active Cases:</h1>
-            <h3 th:text="${active}"></h3>
 
-            <h1>Closed Cases:</h1>
-            <h3 th:text="${closed}"></h3>
+            <h3>Closed Cases:</h3>
+            <h4 th:text="${closed}"></h4>
         </section>
 
         <button onclick="goBack()">Back</button>

@@ -51,10 +51,10 @@ public class Covid19Controller {
         model.addAttribute("countryTotals", countryTotals);
         return "covid19";
     }
-    
+
     @GetMapping("/continents/{continent}/countries")
     public String getCountriesTotal(
-            Model model, 
+            Model model,
             @PathVariable String continent
     ) throws Exception {
         List<CountryTotal> countryTotalsByContinent = covid19Service
@@ -63,22 +63,36 @@ public class Covid19Controller {
         model.addAttribute("countryTotals", countryTotalsByContinent);
         return "continent";
     }
-    
+
     @GetMapping("/countries/{country}")
     public String getCountryTotal(
-            Model model, 
+            Model model,
             @PathVariable String country
     ) throws Exception {
         CountryTotal countryTotal = covid19Service
                 .getCountryTotal(country, true, true, "", true);
         model.addAttribute("flag", countryTotal.getCountryInfo().getFlag());
-        
+
         model.addAttribute("cases", countryTotal.getCases());
         model.addAttribute("deaths", countryTotal.getDeaths());
         model.addAttribute("recovered", countryTotal.getRecovered());
 
         model.addAttribute("active", countryTotal.getActive());
         model.addAttribute("closed", countryTotal.getDeaths() + countryTotal.getRecovered());
+
+        float activePercentage = (float) ((Double.valueOf(countryTotal.getActive()) * 100) / Double.valueOf(countryTotal.getCases()));
+        model.addAttribute("activePercentage", activePercentage);
+
+        float recoveredPercentage = (float) ((Double.valueOf(countryTotal.getRecovered()) * 100) / Double.valueOf(countryTotal.getCases()));
+        model.addAttribute("recoveredPercentage", recoveredPercentage);
+
+        float deathPercentage = (float) ((Double.valueOf(countryTotal.getDeaths()) * 100) / Double.valueOf(countryTotal.getCases()));
+        model.addAttribute("deathPercentage", deathPercentage);
+
+        model.addAttribute("todayCases", countryTotal.getTodayCases());
+        model.addAttribute("todayRecovered", countryTotal.getTodayRecovered());
+        model.addAttribute("todayDeaths", countryTotal.getTodayDeaths());
+
         return "country";
     }
 
