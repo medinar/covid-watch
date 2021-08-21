@@ -1,11 +1,13 @@
 package com.medinar.covid19app.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 
 /**
  *
  * @author Rommel Medina
  */
+@Data
 public class CountryInfo {
     public int _id;
     public String iso2;

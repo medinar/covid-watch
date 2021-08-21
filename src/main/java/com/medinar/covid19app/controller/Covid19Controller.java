@@ -32,7 +32,7 @@ public class Covid19Controller {
         model.addAttribute("active", worldTotal.getActive());
         model.addAttribute("closed", worldTotal.getDeaths() + worldTotal.getRecovered());
 
-        return "covid19";
+        return "index";
 
     }
 
@@ -71,7 +71,14 @@ public class Covid19Controller {
     ) throws Exception {
         CountryTotal countryTotal = covid19Service
                 .getCountryTotal(country, true, true, "", true);
-        model.addAttribute("countryTotal", countryTotal);
+        model.addAttribute("flag", countryTotal.getCountryInfo().getFlag());
+        
+        model.addAttribute("cases", countryTotal.getCases());
+        model.addAttribute("deaths", countryTotal.getDeaths());
+        model.addAttribute("recovered", countryTotal.getRecovered());
+
+        model.addAttribute("active", countryTotal.getActive());
+        model.addAttribute("closed", countryTotal.getDeaths() + countryTotal.getRecovered());
         return "country";
     }
 
