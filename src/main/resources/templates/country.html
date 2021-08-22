@@ -4,53 +4,62 @@
         <title>Countries | The Covid-19 App</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" type="image/png" href="https://img.icons8.com/color/48/000000/virus.png">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="icon" type="image/png" href="../assets/icons8-virus-48.png">
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">    
     </head>
     <body>
         <section id="navigation">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#">Covid-19 Watch</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="/covid-19">Home</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Continents
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <li><a href="/covid-19/continents/Africa/countries">Africa</a></li>
-                                    <li><a href="/covid-19/continents/Asia/countries">Asia</a></li>
-                                    <li><a href="/covid-19/continents/Australia-Oceania/countries">Australia-Oceania</a></li>
-                                    <li><a href="/covid-19/continents/Europe/countries">Europe</a></li>
-                                    <li><a href="/covid-19/continents/North America/countries">North America</a></li>
-                                    <li><a href="/covid-19/continents/South America/countries">South America</a></li>
-                                </ul>
-                            </li>                            
-                            <li class="nav-item">
-                                <a class="nav-link" href="/covid-19">Contact</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/covid-19">About</a>
-                            </li>
-                        </ul>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light static-top mb-5 shadow">
+                <div class="d-flex flex-grow-1">
+                    <span class="w-100 d-lg-none d-block"><!-- hidden spacer to center brand on mobile --></span>
+                    <a class="navbar-brand d-none d-lg-inline-block" href="/covid-19">
+                        <img src="../assets/icons8-virus-48.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                        COVID-19 Watch
+                    </a>
+                    <a class="navbar-brand-two mx-auto d-lg-none d-inline-block" href="#">
+                        <img src="../assets/icons8-virus-48.png" alt="logo">
+                    </a>
+                    <div class="w-100 text-right">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
                     </div>
+                </div>
+                <div class="collapse navbar-collapse flex-grow-1 text-right" id="myNavbar">
+                    <ul class="navbar-nav ml-auto flex-nowrap">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle nav-link m-2 menu-item" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Continents
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li><a href="/covid-19/continents/Africa" class="nav-link m-2 menu-item">Africa</a></li>
+                                <li><a href="/covid-19/continents/Asia" class="nav-link m-2 menu-item">Asia</a></li>
+                                <li><a href="/covid-19/continents/Australia-Oceania" class="nav-link m-2 menu-item">Australia-Oceania</a></li>
+                                <li><a href="/covid-19/continents/Europe" class="nav-link m-2 menu-item">Europe</a></li>
+                                <li><a href="/covid-19/continents/North America" class="nav-link m-2 menu-item">North America</a></li>
+                                <li><a href="/covid-19/continents/South America" class="nav-link m-2 menu-item">South America</a></li>
+                            </ul>
+                        </li>                        
+                        <li class="nav-item">
+                            <a href="#" class="nav-link m-2 menu-item">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link m-2 menu-item">Contact</a>
+                        </li>
+                    </ul>
                 </div>
             </nav>
         </section>
+
         <section id="main">
             <h2>Cases Overview</h2>
             <p><img th:src="${flag}" width="60px"/><span th:text="${country}"></span></p>
-            
+
             <br>
-            
-            
+
+
             <h3>Coronavirus Cases:</h3>
             <h4 th:text="${cases}"></h4>
 
@@ -81,7 +90,7 @@
                 <br>
                 <h6>Total Deaths</h6>
                 <h1 th:text="${deaths}"></h1>
-                
+
                 <br>
                 <h6>New Cases</h6>
                 <h1 th:text="${todayCases}"></h1>
@@ -93,7 +102,7 @@
                 <h1 th:text="${todayDeaths}"></h1>
             </div>
         </section>
-        
+
         <hr>
         <section>
 

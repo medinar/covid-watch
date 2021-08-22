@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import com.medinar.covid19app.service.ContinentalService;
 
 /**
  *
@@ -20,6 +21,9 @@ public class Covid19Controller {
 
     @Autowired
     Covid19Service covid19Service;
+    
+    @Autowired
+    ContinentalService continentalService;
 
     @GetMapping("/")
     public String covid19(Model model) throws Exception {
@@ -52,14 +56,20 @@ public class Covid19Controller {
         return "covid19";
     }
 
-    @GetMapping("/continents/{continent}/countries")
-    public String getCountriesTotal(
+    @GetMapping("/continents/{continent}")
+    public String getContinentalTotal(
             Model model,
             @PathVariable String continent
     ) throws Exception {
         List<CountryTotal> countryTotalsByContinent = covid19Service
                 .getNationalTotalsbyContinent(continent, true, true, "", true);
+        
+        ContinentalTotal continentalTotal = continentalService.getTotalByContinent(continent);
+        
         model.addAttribute("continent", continent);
+        model.addAttribute("continentTotalCases", continentalTotal.getCases());
+        model.addAttribute("continentTotalDeaths", continentalTotal.getDeaths());
+        
         model.addAttribute("countryTotals", countryTotalsByContinent);
         return "continent";
     }

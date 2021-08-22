@@ -7,8 +7,6 @@ import com.medinar.covid19app.domain.WorldTotal;
 import com.medinar.covid19app.utility.JSONUtils;
 import java.io.IOException;
 import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpClient.Version;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
@@ -22,18 +20,8 @@ import org.springframework.stereotype.Service;
  * @author Rommel Medina
  */
 @Service
-public class Covid19ServiceImpl implements Covid19Service {
+public class Covid19ServiceImpl extends AbstractService implements Covid19Service {
 
-    /**
-     * Used to send requests and receive responses. Provides Synchronous and
-     * Asynchronous request mechanisms. HttpClient instance is immutable, once
-     * created you can send multiple requests with the same. To send requests,
-     * first you need to create HttpClient.
-     *
-     * If HTTP/2 is not supported by the server, processes the request using
-     * HTTP/1.1 You can use executor() for asynchronous tasks.
-     */
-    private static final HttpClient client = HttpClient.newBuilder().version(Version.HTTP_2).build();
     public static final String WORLD_TOTAL_URL = "https://disease.sh/v3/covid-19/all?yesterday=true&twoDaysAgo=true&allowNull=false";
     public static final String CONTINENTAL_TOTAL_URL = "https://disease.sh/v3/covid-19/continents";
     public static final String COUNTRIES_TOTAL_URL = "https://disease.sh/v3/covid-19/countries";
@@ -62,7 +50,7 @@ public class Covid19ServiceImpl implements Covid19Service {
                 .GET()
                 .build();
 
-        CompletableFuture<HttpResponse<String>> response = client
+        CompletableFuture<HttpResponse<String>> response = HTTP_CLIENT
                 .sendAsync(request, HttpResponse.BodyHandlers.ofString());
 
         response.thenAccept(res -> System.out.println(res));
@@ -90,7 +78,7 @@ public class Covid19ServiceImpl implements Covid19Service {
                 .GET()
                 .build();
 
-        CompletableFuture<HttpResponse<String>> response = client
+        CompletableFuture<HttpResponse<String>> response = HTTP_CLIENT
                 .sendAsync(request, HttpResponse.BodyHandlers.ofString());
 
         response.thenAccept(res -> System.out.println(res));
@@ -120,7 +108,7 @@ public class Covid19ServiceImpl implements Covid19Service {
                 .GET()
                 .build();
 
-        CompletableFuture<HttpResponse<String>> response = client
+        CompletableFuture<HttpResponse<String>> response = HTTP_CLIENT
                 .sendAsync(request, HttpResponse.BodyHandlers.ofString());
 
         response.thenAccept(res -> System.out.println(res));
@@ -151,7 +139,7 @@ public class Covid19ServiceImpl implements Covid19Service {
                 .GET()
                 .build();
 
-        CompletableFuture<HttpResponse<String>> response = client
+        CompletableFuture<HttpResponse<String>> response = HTTP_CLIENT
                 .sendAsync(request, HttpResponse.BodyHandlers.ofString());
 
         response.thenAccept(res -> System.out.println(res));
@@ -191,7 +179,7 @@ public class Covid19ServiceImpl implements Covid19Service {
                 .GET()
                 .build();
 
-        CompletableFuture<HttpResponse<String>> response = client
+        CompletableFuture<HttpResponse<String>> response = HTTP_CLIENT
                 .sendAsync(request, HttpResponse.BodyHandlers.ofString());
 
         response.thenAccept(res -> System.out.println(res));

@@ -1,67 +1,175 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
     <head>
-        <title>Countries | The Covid-19 App</title>
+        <title>Countries | The Covid-19 Watch</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" type="image/png" href="https://img.icons8.com/color/48/000000/virus.png">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="icon" type="image/png" href="assets/icons8-virus-48.png">
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    </head>
+    
     <body>
         <section id="navigation">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#">Covid-19 Watch</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="/covid-19">Home</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Continents
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <li><a href="/covid-19/continents/Africa/countries">Africa</a></li>
-                                    <li><a href="/covid-19/continents/Asia/countries">Asia</a></li>
-                                    <li><a href="/covid-19/continents/Australia-Oceania/countries">Australia-Oceania</a></li>
-                                    <li><a href="/covid-19/continents/Europe/countries">Europe</a></li>
-                                    <li><a href="/covid-19/continents/North America/countries">North America</a></li>
-                                    <li><a href="/covid-19/continents/South America/countries">South America</a></li>
-                                </ul>
-                            </li>                            
-                            <li class="nav-item">
-                                <a class="nav-link" href="/covid-19">Contact</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/covid-19">About</a>
-                            </li>
-                        </ul>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light static-top mb-5 shadow">
+                <div class="d-flex flex-grow-1">
+                    <span class="w-100 d-lg-none d-block"><!-- hidden spacer to center brand on mobile --></span>
+                    <a class="navbar-brand d-none d-lg-inline-block" href="/covid-19">
+                        <img src="assets/icons8-virus-48.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                        COVID-19 Watch
+                    </a>
+                    <a class="navbar-brand-two mx-auto d-lg-none d-inline-block" href="#">
+                        <img src="assets/icons8-virus-48.png" alt="logo">
+                    </a>
+                    <div class="w-100 text-right">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
                     </div>
+                </div>
+                <div class="collapse navbar-collapse flex-grow-1 text-right" id="myNavbar">
+                    <ul class="navbar-nav ml-auto flex-nowrap">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle nav-link m-2 menu-item" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Continents
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li><a href="/covid-19/continents/Africa" class="nav-link m-2 menu-item">Africa</a></li>
+                                <li><a href="/covid-19/continents/Asia" class="nav-link m-2 menu-item">Asia</a></li>
+                                <li><a href="/covid-19/continents/Australia-Oceania" class="nav-link m-2 menu-item">Australia-Oceania</a></li>
+                                <li><a href="/covid-19/continents/Europe" class="nav-link m-2 menu-item">Europe</a></li>
+                                <li><a href="/covid-19/continents/North America" class="nav-link m-2 menu-item">North America</a></li>
+                                <li><a href="/covid-19/continents/South America" class="nav-link m-2 menu-item">South America</a></li>
+                            </ul>
+                        </li>                        
+                        <li class="nav-item">
+                            <a href="#" class="nav-link m-2 menu-item">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link m-2 menu-item">Contact</a>
+                        </li>
+                    </ul>
                 </div>
             </nav>
         </section>
-        <section id="main">
-            <h1>Coronavirus Cases:</h1>
-            <h3 th:text="${cases}"></h3>
 
-            <h1>Deaths:</h1>
-            <h3 th:text="${deaths}"></h3>
+        <br><br><br>
 
-            <h1>Recovered:</h1>
-            <h3 th:text="${recovered}"></h3>
-
-        </section>
-        <hr>
         <section>
-            <h1>Active Cases:</h1>
-            <h3 th:text="${active}"></h3>
+            <div class="container mb-3 mt-3">
+                <div class="row">
+                    <div class="mx-auto">
+                        <h3>
+                            <span th:text="${cases}" class="digits"></span>
+                            <small class="text-muted"> Worldwide COVID-19 cases  </small>
+                        </h3>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="mx-auto">
+                        <img src="assets/365-3656845_world-map-silhouette-simple-hd.png" alt="" />
+                    </div>
+                </div>
+                <br><br><br><br><br>
+                <div class="row">
+                    <div class="mx-auto">
+                        <h3>
+                            <span th:text="${deaths}" class="digits"></span> 
+                            <small class="text-muted"> Deaths from COVID-19</small>
+                        </h3>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="mx-auto">
+                        <img src="assets/pexels-markus-spiske-3970329.jpg" alt="" width="680px" height="320px" />
+                    </div>
+                </div>
+                <br><br><br><br><br>
+                <div class="row">
+                    <div class="mx-auto">
+                        <h3>
+                            <span th:text="${recovered}" class="digits"></span> 
+                            <small class="text-muted"> Recoveries from COVID-19</small>
+                        </h3>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="mx-auto">
+                        <img src="assets/recovery.jpg" alt="" width="680px" height="320px" />
+                    </div>
+                </div>
 
-            <h1>Closed Cases:</h1>
-            <h3 th:text="${closed}"></h3>
+                <br><br><br><br><br>
+
+                <div class="row">
+                    <div class="col">
+                        <h3>
+                            <small class="text-muted">Active Cases</small><br>
+                            <span th:text="${active}" class="digits"></span> 
+                        </h3>                        
+                    </div>
+                    <div class="col"><img src="assets/recovery.jpg" alt="" class="img-thumbnail" /></div>
+                    <div class="col">
+                        <h3>
+                            <small class="text-muted">Closed Cases</small><br>
+                            <span th:text="${closed}" class="digits"></span> 
+                        </h3> 
+                        <div class="col"><img src="assets/recovery.jpg" alt="" class="img-thumbnail" /></div>
+                    </div>
+
+                </div>    
         </section>
+
+        <br><br><br><br><br>
+
+        <section id="footer">
+            <div class="container mb-3 mt-3">
+                <!-- Footer -->
+                <footer class="page-footer font-small special-color-dark pt-4">
+
+                    <!-- Footer Elements -->
+                    <!--                    <div class="container">
+                    
+                                             Social buttons 
+                                            <ul class="social-network social-circle">
+                                                <li><a href="#" class="icoRss" title="Rss"><i class="fa fa-rss"></i></a></li>
+                                                <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                                                <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                                                <li><a href="#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+                                                <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+                                            </ul>
+                                             Social buttons 
+                    
+                                        </div>-->
+                    <!-- Footer Elements -->
+
+                    <!-- Copyright -->
+                    <div class="footer-copyright text-center py-3">© 2021 Copyright:
+                        <a href="#"> MhelZone.com</a>
+                    </div>
+                    <!-- Copyright -->
+
+                </footer>
+                <!-- Footer -->
+            </div>
+        </section>        
+
     </body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script>
+        $.fn.digitss = function () {
+            return this.each(function () {
+                $(this).text($(this).text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+            })
+        }
+        $(".digits").digitss();
+    </script>
 </html>

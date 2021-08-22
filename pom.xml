@@ -11,7 +11,7 @@
 	<groupId>com.medinar</groupId>
 	<artifactId>covid-19-app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>The COVID-19 App</name>
+	<name>The COVID-19 Watch</name>
 	<description>The COVID-19 App is a java based web implementation of Open Disease Data API - https://disease.sh/.</description>
 	<properties>
 		<java.version>11</java.version>

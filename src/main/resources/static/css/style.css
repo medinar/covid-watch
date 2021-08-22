@@ -1,0 +1,8 @@
+body {
+  background: url('assets/365-3656845_world-map-silhouette-simple-hd.png') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+}
+
