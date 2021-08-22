@@ -2,7 +2,7 @@ package com.medinar.covid19app.service;
 
 import com.medinar.covid19app.domain.ContinentalTotal;
 import com.medinar.covid19app.domain.CountryTotal;
-import com.medinar.covid19app.domain.WorldTotal;
+import com.medinar.covid19app.domain.GlobalTotal;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -13,11 +13,11 @@ import java.util.concurrent.ExecutionException;
  */
 public interface Covid19Service {
     
-    public abstract WorldTotal getWorldTotal(
-            boolean yesterday,
-            boolean twoDaysAgo,
-            boolean allowNull
-    ) throws InterruptedException, ExecutionException, IOException;
+//    public abstract GlobalTotal getWorldTotal(
+//            boolean yesterday,
+//            boolean twoDaysAgo,
+//            boolean allowNull
+//    ) throws InterruptedException, ExecutionException, IOException;
 
     /**
      *

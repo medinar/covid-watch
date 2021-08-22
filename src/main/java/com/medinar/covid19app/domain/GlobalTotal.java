@@ -7,7 +7,7 @@ import lombok.Data;
  * @author Rommel Medina
  */
 @Data
-public class WorldTotal {
+public class GlobalTotal {
     public long updated;
     public int cases;
     public int todayCases;
