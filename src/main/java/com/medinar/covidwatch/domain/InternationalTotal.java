@@ -7,9 +7,9 @@ import lombok.Data;
  * @author Rommel Medina
  */
 @Data
-public class CountryTotal {
+public class InternationalTotal {
 
-    public Object updated;
+    public long updated;
     public String country;
     public CountryInfo countryInfo;
     public int cases;

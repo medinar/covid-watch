@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
     <head>
-        <title>Continent | Covid Watch</title>
+        <title>Continental | Covid Watch</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" type="image/png" href="../assets/icons8-virus-48.png">
@@ -102,26 +102,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="countryTotal : ${countryTotals}">
+                        <tr th:each="internationalTotal : ${internationalTotals}">
                             <td>
-                                <img th:src="${countryTotal.countryInfo.flag}" width="32px" />
-                                <a th:href="@{/countries/{country}(country=${countryTotal.country})}">
-                                    <span th:text="${countryTotal.country}" />
+                                <img th:src="${internationalTotal.countryInfo.flag}" width="32px" />
+                                <a th:href="@{/international/{country}(country=${internationalTotal.country})}">
+                                    <span th:text="${internationalTotal.country}" />
                                 </a>
                             </td>
-                            <td th:text="${countryTotal.cases}" class="digits"></td>
-                            <td th:text="${countryTotal.todayCases}" class="digits"></td>
-                            <td th:text="${countryTotal.deaths}" class="digits"></td>
-                            <td th:text="${countryTotal.todayDeaths}" class="digits"></td>
-                            <td th:text="${countryTotal.recovered}" class="digits"></td>
-                            <td th:text="${countryTotal.todayRecovered}" class="digits"></td>
-                            <td th:text="${countryTotal.active}" class="digits"></td>
-                            <td th:text="${countryTotal.critical}" class="digits"></td>
-                            <td th:text="${countryTotal.casesPerOneMillion}" class="digits"></td>
-                            <td th:text="${countryTotal.deathsPerOneMillion}" class="digits"></td>
-                            <td th:text="${countryTotal.tests}" class="digits"></td>
-                            <td th:text="${countryTotal.testsPerOneMillion}" class="digits"></td>
-                            <td th:text="${countryTotal.population}" class="digits"></td>
+                            <td th:text="${internationalTotal.cases}" class="digits"></td>
+                            <td th:text="${internationalTotal.todayCases}" class="digits"></td>
+                            <td th:text="${internationalTotal.deaths}" class="digits"></td>
+                            <td th:text="${internationalTotal.todayDeaths}" class="digits"></td>
+                            <td th:text="${internationalTotal.recovered}" class="digits"></td>
+                            <td th:text="${internationalTotal.todayRecovered}" class="digits"></td>
+                            <td th:text="${internationalTotal.active}" class="digits"></td>
+                            <td th:text="${internationalTotal.critical}" class="digits"></td>
+                            <td th:text="${internationalTotal.casesPerOneMillion}" class="digits"></td>
+                            <td th:text="${internationalTotal.deathsPerOneMillion}" class="digits"></td>
+                            <td th:text="${internationalTotal.tests}" class="digits"></td>
+                            <td th:text="${internationalTotal.testsPerOneMillion}" class="digits"></td>
+                            <td th:text="${internationalTotal.population}" class="digits"></td>
                         </tr>
                     </tbody>
                     <tfoot>

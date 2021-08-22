@@ -1,6 +1,6 @@
 package com.medinar.covidwatch.service;
 
-import com.medinar.covidwatch.domain.CountryTotal;
+import com.medinar.covidwatch.domain.InternationalTotal;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -9,7 +9,7 @@ import java.util.concurrent.ExecutionException;
  *
  * @author Rommel Medina
  */
-public interface CountryService {
+public interface InternationalService {
 
     /**
      *
@@ -24,14 +24,14 @@ public interface CountryService {
      * @throws ExecutionException
      * @throws IOException
      */
-    public abstract List<CountryTotal> getTotals(
+    public abstract List<InternationalTotal> getTotals(
             boolean yesterday,
             boolean twoDaysAgo,
             String sortBy,
             boolean allowNull
     ) throws InterruptedException, ExecutionException, IOException;
 
-    public abstract CountryTotal getTotal(
+    public abstract InternationalTotal getTotal(
             String country,
             boolean yesterday,
             boolean twoDaysAgo,
@@ -50,7 +50,7 @@ public interface CountryService {
      * @throws ExecutionException
      * @throws IOException 
      */
-    public abstract List<CountryTotal> getTotalsbyContinent(
+    public abstract List<InternationalTotal> getTotalsbyContinent(
             String continent,
             boolean yesterday,
             boolean twoDaysAgo,

@@ -1,8 +1,8 @@
 package com.medinar.covidwatch.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.medinar.covidwatch.domain.CountryTotal;
-import static com.medinar.covidwatch.service.AbstractService.COUNTRIES_TOTAL_URL;
+import com.medinar.covidwatch.domain.InternationalTotal;
+import static com.medinar.covidwatch.service.AbstractService.INTERNATIONAL_TOTAL_URL;
 import static com.medinar.covidwatch.service.AbstractService.COUNTRY_TOTAL_URL;
 import static com.medinar.covidwatch.service.AbstractService.HTTP_CLIENT;
 import com.medinar.covidwatch.utility.JSONUtils;
@@ -21,27 +21,27 @@ import org.springframework.stereotype.Service;
  * @author Rommel Medina
  */
 @Service
-public class CountryServiceImpl implements CountryService {
+public class InternationalServiceImpl implements InternationalService {
 
     @Override
-    public List<CountryTotal> getTotals(
+    public List<InternationalTotal> getTotals(
             boolean yesterday,
             boolean twoDaysAgo,
             String sortBy,
             boolean allowNull
     ) throws InterruptedException, ExecutionException, IOException {
 
-        StringBuilder sbCountryTotalUrl = new StringBuilder(100);
-        sbCountryTotalUrl.append(COUNTRIES_TOTAL_URL)
+        StringBuilder sbInternationalTotalUrl = new StringBuilder(100);
+        sbInternationalTotalUrl.append(INTERNATIONAL_TOTAL_URL)
                 .append("?yesterday=").append(yesterday)
                 .append("&twoDaysAgo=").append(twoDaysAgo);
         if (!sortBy.isBlank()) {
-            sbCountryTotalUrl.append("&sort=").append(sortBy);
+            sbInternationalTotalUrl.append("&sort=").append(sortBy);
         }
-        sbCountryTotalUrl.append("&allowNull=").append(allowNull);
+        sbInternationalTotalUrl.append("&allowNull=").append(allowNull);
 
         HttpRequest request = HttpRequest
-                .newBuilder(URI.create(sbCountryTotalUrl.toString()))
+                .newBuilder(URI.create(sbInternationalTotalUrl.toString()))
                 .header("Content-Type", "application/json")
                 .GET()
                 .build();
@@ -51,23 +51,22 @@ public class CountryServiceImpl implements CountryService {
 
         response.thenAccept(res -> System.out.println(res));
 
-        List<CountryTotal> countryTotals = JSONUtils
-                .convertFromJsonToList(
-                        response.get().body(),
-                        new TypeReference<List<CountryTotal>>() {
+        List<InternationalTotal> internationalTotals = JSONUtils
+                .convertFromJsonToList(response.get().body(),
+                        new TypeReference<List<InternationalTotal>>() {
                 });
 
         if (response.get().statusCode() == 500) {
             System.out.println("Country Totals Not Avaialble");
         } else {
-            countryTotals.forEach(System.out::println);
+            internationalTotals.forEach(System.out::println);
         }
         response.join();
-        return countryTotals;
+        return internationalTotals;
     }
 
     @Override
-    public CountryTotal getTotal(
+    public InternationalTotal getTotal(
             String country,
             boolean yesterday,
             boolean twoDaysAgo,
@@ -96,19 +95,19 @@ public class CountryServiceImpl implements CountryService {
 
         response.thenAccept(res -> System.out.println(res));
 
-        CountryTotal countryTotal = null;
+        InternationalTotal internationalTotal = null;
         if (response.get().statusCode() == 500) {
             System.out.println("Country Not Avaialble");
         } else {
-            countryTotal = JSONUtils.covertFromJsonToObject(response.get().body(), CountryTotal.class);
-            System.out.println(countryTotal);
+            internationalTotal = JSONUtils.covertFromJsonToObject(response.get().body(), InternationalTotal.class);
+            System.out.println(internationalTotal);
         }
         response.join();
-        return countryTotal;
+        return internationalTotal;
     }
 
     @Override
-    public List<CountryTotal> getTotalsbyContinent(
+    public List<InternationalTotal> getTotalsbyContinent(
             String continent,
             boolean yesterday,
             boolean twoDaysAgo,
@@ -117,7 +116,7 @@ public class CountryServiceImpl implements CountryService {
     ) throws InterruptedException, ExecutionException, IOException {
 
         StringBuilder sbContinentalTotalUrl = new StringBuilder(100);
-        sbContinentalTotalUrl.append(COUNTRIES_TOTAL_URL)
+        sbContinentalTotalUrl.append(INTERNATIONAL_TOTAL_URL)
                 .append("?yesterday=").append(yesterday)
                 .append("&twoDaysAgo=").append(twoDaysAgo);
         if (!sortBy.isBlank()) {
@@ -136,29 +135,28 @@ public class CountryServiceImpl implements CountryService {
 
         response.thenAccept(res -> System.out.println(res));
 
-        List<CountryTotal> countryTotals = JSONUtils
-                .convertFromJsonToList(
-                        response.get().body(),
-                        new TypeReference<List<CountryTotal>>() {
+        List<InternationalTotal> internationalTotals = JSONUtils
+                .convertFromJsonToList(response.get().body(),
+                        new TypeReference<List<InternationalTotal>>() {
                 });
 
-        List<CountryTotal> countryTotalsByContinent = null;
+        List<InternationalTotal> internationalTotalsByContinent = null;
 
         if (response.get().statusCode() == 500) {
             System.out.println("Country Totals Not Available");
         } else {
 
-            countryTotalsByContinent = countryTotals.stream()
-                    .filter(countryTotal -> countryTotal
+            internationalTotalsByContinent = internationalTotals.stream()
+                    .filter(internationalTotal -> internationalTotal
                     .getContinent()
                     .equalsIgnoreCase(continent)
                     )
                     .collect(Collectors.toList());
 
-            countryTotalsByContinent.forEach(System.out::println);
+            internationalTotalsByContinent.forEach(System.out::println);
         }
         response.join();
-        return countryTotalsByContinent;
+        return internationalTotalsByContinent;
     }
 
 }

@@ -25,7 +25,7 @@ public abstract class AbstractService {
     protected static final String BASE_URL = "https://disease.sh/v3/covid-19";
     protected static final String GLOBAL_TOTAL_URL = BASE_URL + "/all";
     protected static final String CONTINENTAL_TOTAL_URL = BASE_URL + "/continents";
-    protected static final String COUNTRIES_TOTAL_URL = BASE_URL + "/countries";
+    protected static final String INTERNATIONAL_TOTAL_URL = BASE_URL + "/countries";
     protected static final String COUNTRY_TOTAL_URL = BASE_URL + "/countries";
 
 }
