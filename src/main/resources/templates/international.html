@@ -55,7 +55,7 @@
 
         <section id="main">
             <h2>Cases Overview</h2>
-            <p><img th:src="${flag}" width="60px"/><span th:text="${country}"></span></p>
+            <p><img th:src="${flag}" width="60px"/><span th:text="${#uris.unescapeQueryParam(country)}"></span></p>
 
             <br>
 
