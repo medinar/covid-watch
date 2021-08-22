@@ -1,6 +1,7 @@
 package com.medinar.covidwatch.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.medinar.covidwatch.config.CovidApiConfig;
 import com.medinar.covidwatch.domain.ContinentalTotal;
 import static com.medinar.covidwatch.service.AbstractService.HTTP_CLIENT;
 import com.medinar.covidwatch.utility.JSONUtils;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -21,13 +23,20 @@ import org.springframework.stereotype.Service;
 @Service
 public class ContinentalServiceImpl extends AbstractService implements ContinentalService {
 
+    @Autowired
+    CovidApiConfig config;
+
     @Override
     public ContinentalTotal getTotal(
             String continent
     ) throws InterruptedException, ExecutionException, IOException {
 
+        StringBuilder sbContinentalTotalUrl = new StringBuilder(100);
+        sbContinentalTotalUrl.append(config.getBaseUrl())
+                .append(config.getInternationalResource());
+
         HttpRequest request = HttpRequest
-                .newBuilder(URI.create(CONTINENTAL_TOTAL_URL))
+                .newBuilder(URI.create(sbContinentalTotalUrl.toString()))
                 .header("Content-Type", "application/json")
                 .GET()
                 .build();
@@ -65,7 +74,8 @@ public class ContinentalServiceImpl extends AbstractService implements Continent
     ) throws InterruptedException, ExecutionException, IOException {
 
         StringBuilder sbContinentalTotalUrl = new StringBuilder(100);
-        sbContinentalTotalUrl.append(GLOBAL_TOTAL_URL)
+        sbContinentalTotalUrl.append(config.getBaseUrl())
+                .append(config.getContinentalResource())
                 .append("?yesterday=").append(yesterday)
                 .append("&twoDaysAgo=").append(twoDaysAgo);
         if (!sortBy.isBlank()) {
@@ -74,7 +84,7 @@ public class ContinentalServiceImpl extends AbstractService implements Continent
         sbContinentalTotalUrl.append("&allowNull=").append(allowNull);
 
         HttpRequest request = HttpRequest
-                .newBuilder(URI.create(CONTINENTAL_TOTAL_URL))
+                .newBuilder(URI.create(sbContinentalTotalUrl.toString()))
                 .header("Content-Type", "application/json")
                 .GET()
                 .build();

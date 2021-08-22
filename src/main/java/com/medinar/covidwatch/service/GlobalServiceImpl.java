@@ -1,5 +1,6 @@
 package com.medinar.covidwatch.service;
 
+import com.medinar.covidwatch.config.CovidApiConfig;
 import com.medinar.covidwatch.domain.GlobalTotal;
 import static com.medinar.covidwatch.service.AbstractService.HTTP_CLIENT;
 import com.medinar.covidwatch.utility.JSONUtils;
@@ -9,6 +10,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -18,6 +20,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class GlobalServiceImpl extends AbstractService implements GlobalService {
 
+    @Autowired
+    CovidApiConfig config;
+    
     @Override
     public GlobalTotal getTotal(
             boolean yesterday,
@@ -25,8 +30,11 @@ public class GlobalServiceImpl extends AbstractService implements GlobalService 
             boolean allowNull
     ) throws InterruptedException, ExecutionException, IOException {
 
+        System.out.println("CovidApiConfig ::: " + config.toString());
+        
         StringBuilder sbGlobalTotalUrl = new StringBuilder(100);
-        sbGlobalTotalUrl.append(GLOBAL_TOTAL_URL)
+        sbGlobalTotalUrl.append(config.getBaseUrl())
+                .append(config.getGlobalResource())
                 .append("?yesterday=").append(yesterday)
                 .append("&twoDaysAgo=").append(twoDaysAgo)
                 .append("&allowNull=").append(allowNull);
