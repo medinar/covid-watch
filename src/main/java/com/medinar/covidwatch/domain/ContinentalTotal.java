@@ -1,4 +1,4 @@
-package com.medinar.covid19app.domain;
+package com.medinar.covidwatch.domain;
 
 import java.util.List;
 import lombok.Data;

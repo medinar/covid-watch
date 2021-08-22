@@ -1,4 +1,4 @@
-package com.medinar.covid19app.service;
+package com.medinar.covidwatch.service;
 
 import java.net.http.HttpClient;
 

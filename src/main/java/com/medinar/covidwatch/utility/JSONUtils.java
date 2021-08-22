@@ -1,4 +1,4 @@
-package com.medinar.covid19app.utility;
+package com.medinar.covidwatch.utility;
 
 import java.io.IOException;
 import java.util.List;

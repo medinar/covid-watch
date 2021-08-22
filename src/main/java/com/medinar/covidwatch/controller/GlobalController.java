@@ -1,7 +1,7 @@
-package com.medinar.covid19app.controller;
+package com.medinar.covidwatch.controller;
 
-import com.medinar.covid19app.domain.GlobalTotal;
-import com.medinar.covid19app.service.GlobalService;
+import com.medinar.covidwatch.domain.GlobalTotal;
+import com.medinar.covidwatch.service.GlobalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +18,7 @@ public class GlobalController {
     GlobalService globalService;
 
     @GetMapping("/global")
-    public String covid19(Model model) throws Exception {
+    public String getTotal(Model model) throws Exception {
         GlobalTotal globalTotal = globalService.getTotal(false, false, true);
 
         model.addAttribute("cases", globalTotal.getCases());

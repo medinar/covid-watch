@@ -1,6 +1,6 @@
-package com.medinar.covid19app.service;
+package com.medinar.covidwatch.service;
 
-import com.medinar.covid19app.domain.CountryTotal;
+import com.medinar.covidwatch.domain.CountryTotal;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;

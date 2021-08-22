@@ -1,10 +1,10 @@
-package com.medinar.covid19app.service;
+package com.medinar.covidwatch.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.medinar.covid19app.domain.ContinentalTotal;
-import static com.medinar.covid19app.service.AbstractService.HTTP_CLIENT;
-import static com.medinar.covid19app.service.Covid19ServiceImpl.CONTINENTAL_TOTAL_URL;
-import com.medinar.covid19app.utility.JSONUtils;
+import com.medinar.covidwatch.domain.ContinentalTotal;
+import static com.medinar.covidwatch.service.AbstractService.HTTP_CLIENT;
+import static com.medinar.covidwatch.service.Covid19ServiceImpl.CONTINENTAL_TOTAL_URL;
+import com.medinar.covidwatch.utility.JSONUtils;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpRequest;

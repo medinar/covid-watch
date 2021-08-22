@@ -1,10 +1,10 @@
-package com.medinar.covid19app;
+package com.medinar.covidwatch;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Covid19AppTests {
+class CovidWatchAppTests {
 
 	@Test
 	void contextLoads() {

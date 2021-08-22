@@ -1,17 +1,17 @@
-package com.medinar.covid19app.controller;
+package com.medinar.covidwatch.controller;
 
-import com.medinar.covid19app.domain.ContinentalTotal;
-import com.medinar.covid19app.domain.CountryTotal;
-import com.medinar.covid19app.domain.GlobalTotal;
-import com.medinar.covid19app.service.Covid19Service;
+import com.medinar.covidwatch.domain.ContinentalTotal;
+import com.medinar.covidwatch.domain.CountryTotal;
+import com.medinar.covidwatch.domain.GlobalTotal;
+import com.medinar.covidwatch.service.Covid19Service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import com.medinar.covid19app.service.ContinentalService;
-import com.medinar.covid19app.service.GlobalService;
+import com.medinar.covidwatch.service.ContinentalService;
+import com.medinar.covidwatch.service.GlobalService;
 
 /**
  *

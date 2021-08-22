@@ -1,4 +1,4 @@
-package com.medinar.covid19app.controller;
+package com.medinar.covidwatch.controller;
 
 import org.springframework.stereotype.Controller;
 
@@ -7,6 +7,6 @@ import org.springframework.stereotype.Controller;
  * @author Rommel Medina
  */
 @Controller
-public class CountryController {
+public class ContinentalController {
 
 }
