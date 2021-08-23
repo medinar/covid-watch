@@ -22,7 +22,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class InternationalServiceImplTest {
 
     @Mock
-    InternationalClientImpl internationalClient;
+    InternationalClientImpl mockClient;
 
     @InjectMocks
     InternationalServiceImpl service;
@@ -32,6 +32,8 @@ public class InternationalServiceImplTest {
 
     /**
      * Test of getTotals method, of class InternationalServiceImpl.
+     *
+     * @throws java.lang.Exception
      */
     @Test
     public void testGetInternationalTotalsHappyPath() throws Exception {
@@ -47,7 +49,7 @@ public class InternationalServiceImplTest {
         mockList.add(mock1);
         mockList.add(mock2);
 
-        when(internationalClient.getInternationalTotals(false, false, "", false))
+        when(mockClient.getInternationalTotals(false, false, "", false))
                 .thenReturn(mockList);
 
         List<InternationalTotal> result = service.getTotals(false, false, "", false);
@@ -59,6 +61,7 @@ public class InternationalServiceImplTest {
 
     /**
      * Test of getTotal method, of class InternationalServiceImpl.
+     * @throws java.lang.Exception
      */
     @Test
     public void testGetInternationalTotalHappyPath() throws Exception {
@@ -69,7 +72,7 @@ public class InternationalServiceImplTest {
         mockInternationalTotal.setCases(100);
         mockInternationalTotal.setCountry(country);
 
-        when(internationalClient.getInternationalTotal(country, true, true, true, true))
+        when(mockClient.getInternationalTotal(country, true, true, true, true))
                 .thenReturn(mockInternationalTotal);
 
         InternationalTotal result = service.getTotal(country, true, true, true, true);
@@ -80,6 +83,7 @@ public class InternationalServiceImplTest {
 
     /**
      * Test of getTotalsbyContinent method, of class InternationalServiceImpl.
+     * @throws java.lang.Exception
      */
     @Test
     public void testGetInternationalTotalsbyContinentHappyPath() throws Exception {
@@ -98,7 +102,7 @@ public class InternationalServiceImplTest {
         list.add(mock1);
         list.add(mock2);
 
-        when(internationalClient.getInternationalTotalsbyContinent(
+        when(mockClient.getInternationalTotalsbyContinent(
                 continent,
                 false,
                 false,
