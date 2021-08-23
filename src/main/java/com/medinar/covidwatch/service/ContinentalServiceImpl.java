@@ -27,7 +27,7 @@ public class ContinentalServiceImpl extends AbstractService implements Continent
     CovidApiConfig config;
 
     @Override
-    public ContinentalTotal getTotal(
+    public Optional<ContinentalTotal> getTotal(
             String continent,
             boolean yesterday,
             boolean twoDaysAgo,
@@ -70,7 +70,7 @@ public class ContinentalServiceImpl extends AbstractService implements Continent
         }
         response.join();
 
-        return continentalTotal.get();
+        return continentalTotal;
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.medinar.covidwatch.service;
 import com.medinar.covidwatch.domain.ContinentalTotal;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -26,7 +27,7 @@ public interface ContinentalService {
      * @throws ExecutionException
      * @throws IOException
      */
-    public abstract ContinentalTotal getTotal(
+    public abstract Optional<ContinentalTotal> getTotal(
             String continent,
             boolean yesterday,
             boolean twoDaysAgo,
