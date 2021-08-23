@@ -2,6 +2,8 @@ package com.medinar.covidwatch.client;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.medinar.covidwatch.config.CovidApiConfig;
+import static com.medinar.covidwatch.constant.Constants.CONTENT_TYPE;
+import static com.medinar.covidwatch.constant.Constants.INTERNAL_SERVER_ERROR;
 import com.medinar.covidwatch.domain.ContinentalTotal;
 import com.medinar.covidwatch.utility.JSONUtils;
 import java.io.IOException;
@@ -13,6 +15,7 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import org.springframework.stereotype.Service;
 
 /**
@@ -44,7 +47,7 @@ public class ContinentalClientImpl extends AbstractClient implements Continental
 
         HttpRequest request = HttpRequest
                 .newBuilder(URI.create(sbContinentalTotalUrl.toString()))
-                .header("Content-Type", "application/json")
+                .header(CONTENT_TYPE, APPLICATION_JSON_VALUE)
                 .GET()
                 .build();
 
@@ -61,7 +64,7 @@ public class ContinentalClientImpl extends AbstractClient implements Continental
 
         Optional<ContinentalTotal> continentalTotal = Optional.empty();
         if (response.get().statusCode() == 500) {
-            System.out.println("Continental Total Not Avaialble");
+            System.out.println(INTERNAL_SERVER_ERROR);
         } else {
             continentalTotal = continentalTotals.stream()
                     .filter(ct -> ct.getContinent().equalsIgnoreCase(continent))
@@ -90,7 +93,7 @@ public class ContinentalClientImpl extends AbstractClient implements Continental
 
         HttpRequest request = HttpRequest
                 .newBuilder(URI.create(sbContinentalTotalUrl.toString()))
-                .header("Content-Type", "application/json")
+                .header(CONTENT_TYPE, APPLICATION_JSON_VALUE)
                 .GET()
                 .build();
 

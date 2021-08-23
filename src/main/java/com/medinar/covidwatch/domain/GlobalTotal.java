@@ -8,25 +8,27 @@ import lombok.Data;
  */
 @Data
 public class GlobalTotal {
-    public long updated;
-    public int cases;
-    public int todayCases;
-    public int deaths;
-    public int todayDeaths;
-    public int recovered;
-    public int todayRecovered;
-    public int active;
-    public int critical;
-    public int casesPerOneMillion;
-    public double deathsPerOneMillion;
-    public long tests;
-    public double testsPerOneMillion;
-    public long population;
-    public int oneCasePerPeople;
-    public int oneDeathPerPeople;
-    public int oneTestPerPeople;
-    public double activePerOneMillion;
-    public double recoveredPerOneMillion;
-    public double criticalPerOneMillion;
-    public int affectedCountries;
+
+    long updated;
+    int cases;
+    int todayCases;
+    int deaths;
+    int todayDeaths;
+    int recovered;
+    int todayRecovered;
+    int active;
+    int critical;
+    int casesPerOneMillion;
+    double deathsPerOneMillion;
+    long tests;
+    double testsPerOneMillion;
+    long population;
+    int oneCasePerPeople;
+    int oneDeathPerPeople;
+    int oneTestPerPeople;
+    double activePerOneMillion;
+    double recoveredPerOneMillion;
+    double criticalPerOneMillion;
+    int affectedCountries;
+
 }

@@ -2,6 +2,11 @@ package com.medinar.covidwatch.client;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.medinar.covidwatch.config.CovidApiConfig;
+import static com.medinar.covidwatch.constant.Constants.ALLWNULL_REQ_PARAM;
+import static com.medinar.covidwatch.constant.Constants.CONTENT_TYPE;
+import static com.medinar.covidwatch.constant.Constants.STRICT_REQ_PARAM;
+import static com.medinar.covidwatch.constant.Constants.TWODAYSAGO_REQ_PARAM;
+import static com.medinar.covidwatch.constant.Constants.YESTERDAY_REQ_PARAM;
 import com.medinar.covidwatch.domain.InternationalTotal;
 import com.medinar.covidwatch.utility.JSONUtils;
 import java.io.IOException;
@@ -39,14 +44,14 @@ public class InternationalClientImpl extends AbstractClient implements Internati
         sbTotalUrl.append(config.getBaseUrl())
                 .append(config.getInternationalResource())
                 .append("/").append(country)
-                .append("?yesterday=").append(yesterday)
-                .append("&twoDaysAgo=").append(twoDaysAgo)
-                .append("&strict=").append(strict)
-                .append("&allowNull=").append(allowNull);
+                .append(YESTERDAY_REQ_PARAM).append(yesterday)
+                .append(TWODAYSAGO_REQ_PARAM).append(twoDaysAgo)
+                .append(STRICT_REQ_PARAM).append(strict)
+                .append(ALLWNULL_REQ_PARAM).append(allowNull);
 
         HttpRequest request = HttpRequest
                 .newBuilder(URI.create(sbTotalUrl.toString()))
-                .header("Content-Type", "application/json")
+                .header(CONTENT_TYPE, APPLICATION_JSON_VALUE)
                 .GET()
                 .build();
 
@@ -95,7 +100,7 @@ public class InternationalClientImpl extends AbstractClient implements Internati
 
         HttpRequest request = HttpRequest
                 .newBuilder(URI.create(sbContinentalTotalUrl.toString()))
-                .header("Content-Type", APPLICATION_JSON_VALUE)
+                .header(CONTENT_TYPE, APPLICATION_JSON_VALUE)
                 .GET()
                 .build();
 
@@ -148,7 +153,7 @@ public class InternationalClientImpl extends AbstractClient implements Internati
 
         HttpRequest request = HttpRequest
                 .newBuilder(URI.create(sbInternationalTotalUrl.toString()))
-                .header("Content-Type", "application/json")
+                .header(CONTENT_TYPE, APPLICATION_JSON_VALUE)
                 .GET()
                 .build();
 

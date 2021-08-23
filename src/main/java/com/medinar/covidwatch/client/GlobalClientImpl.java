@@ -1,6 +1,7 @@
 package com.medinar.covidwatch.client;
 
 import com.medinar.covidwatch.config.CovidApiConfig;
+import static com.medinar.covidwatch.constant.Constants.CONTENT_TYPE;
 import com.medinar.covidwatch.domain.GlobalTotal;
 import com.medinar.covidwatch.utility.JSONUtils;
 import java.io.IOException;
@@ -10,6 +11,7 @@ import java.net.http.HttpResponse;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import org.springframework.stereotype.Service;
 
 /**
@@ -47,7 +49,7 @@ public class GlobalClientImpl extends AbstractClient implements GlobalClient {
          */
         HttpRequest request = HttpRequest
                 .newBuilder(URI.create(sbGlobalTotalUrl.toString()))
-                .header("Content-Type", "application/json")
+                .header(CONTENT_TYPE, APPLICATION_JSON_VALUE)
                 .GET()
                 .build();
 
