@@ -9,11 +9,10 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-//    InternationalServiceImplTest.class, 
-    ContinentalServiceImplIT.class, 
-    InternationalServiceImplIT.class, 
-    GlobalServiceImplIT.class
+    com.medinar.covidwatch.controller.ContinentalControllerIT.class,
+    com.medinar.covidwatch.service.ContinentalServiceImplTest.class, 
+    com.medinar.covidwatch.service.ContinentalServiceImplIT.class
 })
-public class CovidWatchServiceTestSuite {
+public class ContinentalTestSuite {
     // intentionally empty - Test Suite Setup (annotations) is sufficient
 }
