@@ -9,15 +9,6 @@ public class Constants {
     private Constants() {
     }
     
-    public static Constants getInstance() {
-        return ConstantsHolder.INSTANCE;
-    }
-    
-    private static class ConstantsHolder {
-
-        private static final Constants INSTANCE = new Constants();
-    }
-    
     public static final String CONTENT_TYPE = "Content-Type";
     public static final String  INTERNAL_SERVER_ERROR = "Internal Server Error";
     public static final String  ENTRY_NOT_FOUND_ERROR = "Entry Not Found Error";

@@ -13,6 +13,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @author Rommel Medina
  */
 public class JSONUtils {
+    
+    private JSONUtils () {
+    }
 
     /**
      * Converts JSON String into List of Java objects

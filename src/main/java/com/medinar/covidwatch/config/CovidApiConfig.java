@@ -13,10 +13,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class CovidApiConfig {
 
-    private String baseUrl;
-    private String globalResource;
-    private String continentalResource;
-    private String internationalResource;
-    private String env;
+    String baseUrl;
+    String globalResource;
+    String continentalResource;
+    String internationalResource;
+    String env;
 
 }
