@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 public class CountryInfo {
 
-    int id;
+    int _id;
     String iso2;
     String iso3;
     @JsonProperty("lat")
