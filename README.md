@@ -15,7 +15,7 @@ The application uses data that comes from a  public API named Open Disease Data 
 
 The application uses the standard MVC architecture. The controller layer consisting of the Spring Controllers receives the client's requests. It then passes the requests to the Service Layer for processing. The Service layer will then give the results to the Controller, which sends it to a templating engine called Thymeleaf Template before being rendered on the screen. 
 
-![](./README/Covid Watch MVC Project Structure.png)
+![](./README/Covid-Watch-MVC-Project-Structure.png)
 
 ### Features
 
