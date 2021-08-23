@@ -12,7 +12,7 @@
             <properties>
                 <exec.args>-classpath %classpath com.medinar.covidwatch.CovidWatchApp</exec.args>
                 <exec.executable>java</exec.executable>
-                <spring-boot.run.jvmArguments>-Dspring.profiles.active=local</spring-boot.run.jvmArguments>
+                <spring-boot.run.jvmArguments>-Dspring.profiles.active=local -Dfile.encoding=UTF-8</spring-boot.run.jvmArguments>
             </properties>
         </action>
         <action>

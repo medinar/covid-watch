@@ -1,21 +1,12 @@
 package com.medinar.covidwatch.service;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.medinar.covidwatch.client.InternationalClient;
 import com.medinar.covidwatch.config.CovidApiConfig;
 import com.medinar.covidwatch.domain.InternationalTotal;
-import static com.medinar.covidwatch.service.AbstractService.HTTP_CLIENT;
-import com.medinar.covidwatch.utility.JSONUtils;
 import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
-import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import org.springframework.stereotype.Service;
 
 /**

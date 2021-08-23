@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * @author Rommel Medina
  */
 @Service
-public class GlobalServiceImpl extends AbstractService implements GlobalService {
+public class GlobalServiceImpl implements GlobalService {
     
     @Autowired
     GlobalClient client;
