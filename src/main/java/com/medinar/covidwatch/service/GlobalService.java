@@ -11,11 +11,11 @@ import java.util.concurrent.ExecutionException;
 public interface GlobalService {
     
     /**
-     * 
+     * Retrieves the total cases worldwide
      * @param yesterday Queries data reported a day ago
      * @param twoDaysAgo Queries data reported two days ago
      * @param allowNull By default, if a value is missing, it is returned as 0. This allows nulls to be returned
-     * @return
+     * @return Total cases worldwide
      * @throws InterruptedException
      * @throws ExecutionException
      * @throws IOException 

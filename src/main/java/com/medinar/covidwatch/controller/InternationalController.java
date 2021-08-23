@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import com.medinar.covidwatch.service.InternationalService;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -16,16 +17,20 @@ import com.medinar.covidwatch.service.InternationalService;
 public class InternationalController {
 
     @Autowired
-    InternationalService countryService;
+    InternationalService internationalService;
 
     @GetMapping("/international/{country}")
     public String getTotal(
             Model model,
-            @PathVariable String country
+            @PathVariable String country,
+            @RequestParam(required = false) boolean yesterday,
+            @RequestParam(required = false) boolean twoDaysAgo,
+            @RequestParam(required = false) boolean strict,
+            @RequestParam(required = false) boolean allowNull
     ) throws Exception {
 
-        InternationalTotal internationalTotal = countryService
-                .getTotal(country, false, false, "cases", true);
+        InternationalTotal internationalTotal = internationalService
+                .getTotal(country, yesterday, twoDaysAgo, strict, allowNull);
 
         model.addAttribute("flag", internationalTotal.getCountryInfo().getFlag());
 

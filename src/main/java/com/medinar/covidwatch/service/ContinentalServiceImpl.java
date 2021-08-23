@@ -28,12 +28,20 @@ public class ContinentalServiceImpl extends AbstractService implements Continent
 
     @Override
     public ContinentalTotal getTotal(
-            String continent
+            String continent,
+            boolean yesterday,
+            boolean twoDaysAgo,
+            boolean strict,
+            boolean allowNull
     ) throws InterruptedException, ExecutionException, IOException {
 
         StringBuilder sbContinentalTotalUrl = new StringBuilder(100);
         sbContinentalTotalUrl.append(config.getBaseUrl())
-                .append(config.getInternationalResource());
+                .append(config.getContinentalResource())
+                .append("?yesterday=").append(yesterday)
+                .append("&twoDaysAgo=").append(twoDaysAgo)
+                .append("&strict=").append(strict)
+                .append("&allowNull=").append(allowNull);
 
         HttpRequest request = HttpRequest
                 .newBuilder(URI.create(sbContinentalTotalUrl.toString()))
@@ -69,7 +77,7 @@ public class ContinentalServiceImpl extends AbstractService implements Continent
     public List<ContinentalTotal> getTotals(
             boolean yesterday,
             boolean twoDaysAgo,
-            String sortBy,
+            boolean strict,
             boolean allowNull
     ) throws InterruptedException, ExecutionException, IOException {
 
@@ -77,11 +85,9 @@ public class ContinentalServiceImpl extends AbstractService implements Continent
         sbContinentalTotalUrl.append(config.getBaseUrl())
                 .append(config.getContinentalResource())
                 .append("?yesterday=").append(yesterday)
-                .append("&twoDaysAgo=").append(twoDaysAgo);
-        if (!sortBy.isBlank()) {
-            sbContinentalTotalUrl.append("&sort=").append(sortBy);
-        }
-        sbContinentalTotalUrl.append("&allowNull=").append(allowNull);
+                .append("&twoDaysAgo=").append(twoDaysAgo)
+                .append("&strict=").append(strict)
+                .append("&allowNull=").append(allowNull);
 
         HttpRequest request = HttpRequest
                 .newBuilder(URI.create(sbContinentalTotalUrl.toString()))

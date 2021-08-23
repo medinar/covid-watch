@@ -39,7 +39,6 @@ public class GlobalServiceImpl extends AbstractService implements GlobalService 
                 .append("&twoDaysAgo=").append(twoDaysAgo)
                 .append("&allowNull=").append(allowNull);
 
-        // https://dzone.com/articles/java-11-http-client-api-to-consume-restful-web-ser-1
         /**
          * Create HttpRequest instance and set the URI, request method
          * optionally specify the body and headers. HttpRequest instance is

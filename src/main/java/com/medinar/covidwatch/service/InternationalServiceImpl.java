@@ -14,6 +14,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import org.springframework.stereotype.Service;
 
 /**
@@ -74,7 +75,7 @@ public class InternationalServiceImpl implements InternationalService {
             String country,
             boolean yesterday,
             boolean twoDaysAgo,
-            String sortBy,
+            boolean strict,
             boolean allowNull
     ) throws InterruptedException, ExecutionException, IOException {
         
@@ -83,11 +84,9 @@ public class InternationalServiceImpl implements InternationalService {
                 .append(config.getInternationalResource())
                 .append("/").append(country)
                 .append("?yesterday=").append(yesterday)
-                .append("&twoDaysAgo=").append(twoDaysAgo);
-        if (!sortBy.isBlank()) {
-            sbTotalUrl.append("&sort=").append(sortBy);
-        }
-        sbTotalUrl.append("&allowNull=").append(allowNull);
+                .append("&twoDaysAgo=").append(twoDaysAgo)
+                .append("&strict=").append(strict)
+                .append("&allowNull=").append(allowNull);
         
         HttpRequest request = HttpRequest
                 .newBuilder(URI.create(sbTotalUrl.toString()))
@@ -116,7 +115,7 @@ public class InternationalServiceImpl implements InternationalService {
             String continent,
             boolean yesterday,
             boolean twoDaysAgo,
-            String sortBy,
+            boolean strict,
             boolean allowNull
     ) throws InterruptedException, ExecutionException, IOException {
         
@@ -124,15 +123,13 @@ public class InternationalServiceImpl implements InternationalService {
         sbContinentalTotalUrl.append(config.getBaseUrl())
                 .append(config.getInternationalResource())
                 .append("?yesterday=").append(yesterday)
-                .append("&twoDaysAgo=").append(twoDaysAgo);
-        if (!sortBy.isBlank()) {
-            sbContinentalTotalUrl.append("&sort=").append(sortBy);
-        }
-        sbContinentalTotalUrl.append("&allowNull=").append(allowNull);
+                .append("&twoDaysAgo=").append(twoDaysAgo)
+                .append("&strict=").append(strict)
+                .append("&allowNull=").append(allowNull);
         
         HttpRequest request = HttpRequest
                 .newBuilder(URI.create(sbContinentalTotalUrl.toString()))
-                .header("Content-Type", "application/json")
+                .header("Content-Type", APPLICATION_JSON_VALUE)
                 .GET()
                 .build();
         
