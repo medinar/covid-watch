@@ -23,10 +23,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class InternationalServiceImpl implements InternationalService {
-    
+
     @Autowired
     CovidApiConfig config;
-    
+
     @Override
     public List<InternationalTotal> getTotals(
             boolean yesterday,
@@ -34,7 +34,7 @@ public class InternationalServiceImpl implements InternationalService {
             String sortBy,
             boolean allowNull
     ) throws InterruptedException, ExecutionException, IOException {
-        
+
         StringBuilder sbInternationalTotalUrl = new StringBuilder(100);
         sbInternationalTotalUrl.append(config.getBaseUrl())
                 .append(config.getInternationalResource())
@@ -44,32 +44,33 @@ public class InternationalServiceImpl implements InternationalService {
             sbInternationalTotalUrl.append("&sort=").append(sortBy);
         }
         sbInternationalTotalUrl.append("&allowNull=").append(allowNull);
-        
+
         HttpRequest request = HttpRequest
                 .newBuilder(URI.create(sbInternationalTotalUrl.toString()))
                 .header("Content-Type", "application/json")
                 .GET()
                 .build();
-        
+
         CompletableFuture<HttpResponse<String>> response = HTTP_CLIENT
                 .sendAsync(request, HttpResponse.BodyHandlers.ofString());
-        
+
         response.thenAccept(res -> System.out.println(res));
-        
-        List<InternationalTotal> internationalTotals = JSONUtils
-                .convertFromJsonToList(response.get().body(),
-                        new TypeReference<List<InternationalTotal>>() {
-                });
-        
+
+        List<InternationalTotal> internationalTotals = null;
+
         if (response.get().statusCode() == 500) {
             System.out.println("Country Totals Not Avaialble");
         } else {
+            internationalTotals = JSONUtils
+                    .convertFromJsonToList(response.get().body(),
+                            new TypeReference<List<InternationalTotal>>() {
+                    });
             internationalTotals.forEach(System.out::println);
         }
         response.join();
         return internationalTotals;
     }
-    
+
     @Override
     public InternationalTotal getTotal(
             String country,
@@ -78,7 +79,7 @@ public class InternationalServiceImpl implements InternationalService {
             boolean strict,
             boolean allowNull
     ) throws InterruptedException, ExecutionException, IOException {
-        
+
         StringBuilder sbTotalUrl = new StringBuilder(100);
         sbTotalUrl.append(config.getBaseUrl())
                 .append(config.getInternationalResource())
@@ -87,24 +88,26 @@ public class InternationalServiceImpl implements InternationalService {
                 .append("&twoDaysAgo=").append(twoDaysAgo)
                 .append("&strict=").append(strict)
                 .append("&allowNull=").append(allowNull);
-        
+
         HttpRequest request = HttpRequest
                 .newBuilder(URI.create(sbTotalUrl.toString()))
                 .header("Content-Type", "application/json")
                 .GET()
                 .build();
-        
+
         CompletableFuture<HttpResponse<String>> response = HTTP_CLIENT
                 .sendAsync(request, HttpResponse.BodyHandlers.ofString());
-        
+
         response.thenAccept(res -> System.out.println(res));
-        
+
         InternationalTotal internationalTotal = null;
         if (response.get().statusCode() == 500) {
             System.out.println("Country Not Avaialble");
+        } else if (response.get().statusCode() == 404) {
+            System.out.println("Country not found");
         } else {
             internationalTotal = JSONUtils.covertFromJsonToObject(
-                    response.get().body(), 
+                    response.get().body(),
                     InternationalTotal.class
             );
             System.out.println(internationalTotal);
@@ -112,7 +115,7 @@ public class InternationalServiceImpl implements InternationalService {
         response.join();
         return internationalTotal;
     }
-    
+
     @Override
     public List<InternationalTotal> getTotalsbyContinent(
             String continent,
@@ -121,7 +124,7 @@ public class InternationalServiceImpl implements InternationalService {
             boolean strict,
             boolean allowNull
     ) throws InterruptedException, ExecutionException, IOException {
-        
+
         StringBuilder sbContinentalTotalUrl = new StringBuilder(100);
         sbContinentalTotalUrl.append(config.getBaseUrl())
                 .append(config.getInternationalResource())
@@ -129,40 +132,40 @@ public class InternationalServiceImpl implements InternationalService {
                 .append("&twoDaysAgo=").append(twoDaysAgo)
                 .append("&strict=").append(strict)
                 .append("&allowNull=").append(allowNull);
-        
+
         HttpRequest request = HttpRequest
                 .newBuilder(URI.create(sbContinentalTotalUrl.toString()))
                 .header("Content-Type", APPLICATION_JSON_VALUE)
                 .GET()
                 .build();
-        
+
         CompletableFuture<HttpResponse<String>> response = HTTP_CLIENT
                 .sendAsync(request, HttpResponse.BodyHandlers.ofString());
-        
+
         response.thenAccept(res -> System.out.println(res));
-        
+
         List<InternationalTotal> internationalTotals = JSONUtils
                 .convertFromJsonToList(response.get().body(),
                         new TypeReference<List<InternationalTotal>>() {
                 });
-        
+
         List<InternationalTotal> internationalTotalsByContinent = null;
-        
+
         if (response.get().statusCode() == 500) {
             System.out.println("Country Totals Not Available");
         } else {
-            
+
             internationalTotalsByContinent = internationalTotals.stream()
                     .filter(internationalTotal -> internationalTotal
                     .getContinent()
                     .equalsIgnoreCase(continent)
                     )
                     .collect(Collectors.toList());
-            
+
             internationalTotalsByContinent.forEach(System.out::println);
         }
         response.join();
         return internationalTotalsByContinent;
     }
-    
+
 }
