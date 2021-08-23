@@ -7,10 +7,11 @@ import java.net.http.HttpClient;
  * @author Rommel Medina
  */
 public abstract class AbstractClient {
+
     /**
      * Used to send requests and receive responses. Provides Synchronous and
      * Asynchronous request mechanisms. HttpClient instance is immutable, once
-     * created you can send multiple requests with the same. To send requests,
+     * created you can send multiple requests with the same instance. To send requests,
      * first you need to create HttpClient.
      *
      * If HTTP/2 is not supported by the server, processes the request using

@@ -4,6 +4,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.medinar.covidwatch.config.CovidApiConfig;
 import static com.medinar.covidwatch.constant.Constants.ALLWNULL_REQ_PARAM;
 import static com.medinar.covidwatch.constant.Constants.CONTENT_TYPE;
+import static com.medinar.covidwatch.constant.Constants.ENTRY_NOT_FOUND_ERROR;
+import static com.medinar.covidwatch.constant.Constants.INTERNAL_SERVER_ERROR;
+import static com.medinar.covidwatch.constant.Constants.SORT_REQ_PARAM;
 import static com.medinar.covidwatch.constant.Constants.STRICT_REQ_PARAM;
 import static com.medinar.covidwatch.constant.Constants.TWODAYSAGO_REQ_PARAM;
 import static com.medinar.covidwatch.constant.Constants.YESTERDAY_REQ_PARAM;
@@ -17,6 +20,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import org.springframework.stereotype.Service;
@@ -25,6 +29,7 @@ import org.springframework.stereotype.Service;
  *
  * @author Rommel Medina
  */
+@Slf4j
 @Service
 public class InternationalClientImpl extends AbstractClient implements InternationalClient {
 
@@ -58,22 +63,22 @@ public class InternationalClientImpl extends AbstractClient implements Internati
         CompletableFuture<HttpResponse<String>> response = HTTP_CLIENT
                 .sendAsync(request, HttpResponse.BodyHandlers.ofString());
 
-        response.thenAccept(res -> System.out.println(res));
+        response.thenAccept(res -> log.info(res.toString()));
 
         InternationalTotal internationalTotal = null;
         switch (response.get().statusCode()) {
             case 500:
-                System.out.println("Country Not Avaialble");
+                log.error(INTERNAL_SERVER_ERROR);
                 break;
             case 404:
-                System.out.println("Country not found");
+                log.error("Country not found");
                 break;
             default:
                 internationalTotal = JSONUtils.covertFromJsonToObject(
                         response.get().body(),
                         InternationalTotal.class
                 );
-                System.out.println(internationalTotal);
+                log.info(internationalTotal.toString());
                 break;
         }
         response.join();
@@ -107,7 +112,7 @@ public class InternationalClientImpl extends AbstractClient implements Internati
         CompletableFuture<HttpResponse<String>> response = HTTP_CLIENT
                 .sendAsync(request, HttpResponse.BodyHandlers.ofString());
 
-        response.thenAccept(res -> System.out.println(res));
+        response.thenAccept(res -> log.info(res.toString()));
 
         List<InternationalTotal> internationalTotals = JSONUtils
                 .convertFromJsonToList(response.get().body(),
@@ -116,18 +121,22 @@ public class InternationalClientImpl extends AbstractClient implements Internati
 
         List<InternationalTotal> internationalTotalsByContinent = null;
 
-        if (response.get().statusCode() == 500) {
-            System.out.println("Country Totals Not Available");
-        } else {
-
-            internationalTotalsByContinent = internationalTotals.stream()
-                    .filter(internationalTotal -> internationalTotal
-                    .getContinent()
-                    .equalsIgnoreCase(continent)
-                    )
-                    .collect(Collectors.toList());
-
-            internationalTotalsByContinent.forEach(System.out::println);
+        switch (response.get().statusCode()) {
+            case 500:
+                log.error(INTERNAL_SERVER_ERROR);
+                break;
+            case 400:
+                log.error(ENTRY_NOT_FOUND_ERROR);
+                break;
+            default:
+                internationalTotalsByContinent = internationalTotals.stream()
+                        .filter(internationalTotal -> internationalTotal
+                        .getContinent()
+                        .equalsIgnoreCase(continent)
+                        )
+                        .collect(Collectors.toList());
+                internationalTotalsByContinent.forEach(total -> log.info(total.toString()));
+                break;
         }
         response.join();
         return internationalTotalsByContinent;
@@ -144,12 +153,12 @@ public class InternationalClientImpl extends AbstractClient implements Internati
         StringBuilder sbInternationalTotalUrl = new StringBuilder(100);
         sbInternationalTotalUrl.append(config.getBaseUrl())
                 .append(config.getInternationalResource())
-                .append("?yesterday=").append(yesterday)
-                .append("&twoDaysAgo=").append(twoDaysAgo);
+                .append(YESTERDAY_REQ_PARAM).append(yesterday)
+                .append(TWODAYSAGO_REQ_PARAM).append(twoDaysAgo);
         if (!sortBy.isBlank()) {
-            sbInternationalTotalUrl.append("&sort=").append(sortBy);
+            sbInternationalTotalUrl.append(SORT_REQ_PARAM).append(sortBy);
         }
-        sbInternationalTotalUrl.append("&allowNull=").append(allowNull);
+        sbInternationalTotalUrl.append(ALLWNULL_REQ_PARAM).append(allowNull);
 
         HttpRequest request = HttpRequest
                 .newBuilder(URI.create(sbInternationalTotalUrl.toString()))
@@ -160,18 +169,24 @@ public class InternationalClientImpl extends AbstractClient implements Internati
         CompletableFuture<HttpResponse<String>> response = HTTP_CLIENT
                 .sendAsync(request, HttpResponse.BodyHandlers.ofString());
 
-        response.thenAccept(res -> System.out.println(res));
+        response.thenAccept(res -> log.info(res.toString()));
 
         List<InternationalTotal> internationalTotals = null;
 
-        if (response.get().statusCode() == 500) {
-            System.out.println("Country Totals Not Avaialble");
-        } else {
-            internationalTotals = JSONUtils
-                    .convertFromJsonToList(response.get().body(),
-                            new TypeReference<List<InternationalTotal>>() {
-                    });
-            internationalTotals.forEach(System.out::println);
+        switch (response.get().statusCode()) {
+            case 500:
+                log.error(INTERNAL_SERVER_ERROR);
+                break;
+            case 400:
+                log.error(ENTRY_NOT_FOUND_ERROR);
+                break;
+            default:
+                internationalTotals = JSONUtils
+                        .convertFromJsonToList(response.get().body(),
+                                new TypeReference<List<InternationalTotal>>() {
+                        });
+                internationalTotals.forEach(total -> log.info(total.toString()));
+                break;
         }
         response.join();
         return internationalTotals;
