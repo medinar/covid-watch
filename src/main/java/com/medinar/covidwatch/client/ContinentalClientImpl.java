@@ -1,9 +1,117 @@
 package com.medinar.covidwatch.client;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.medinar.covidwatch.config.CovidApiConfig;
+import com.medinar.covidwatch.domain.ContinentalTotal;
+import com.medinar.covidwatch.utility.JSONUtils;
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 /**
  *
  * @author Rommel Medina
  */
+@Service
 public class ContinentalClientImpl extends AbstractClient implements ContinentalClient {
+
+    @Autowired
+    CovidApiConfig config;
+
+    @Override
+    public Optional<ContinentalTotal> getContinentalTotal(
+            String continent,
+            boolean yesterday,
+            boolean twoDaysAgo,
+            boolean strict,
+            boolean allowNull
+    ) throws InterruptedException, ExecutionException, IOException {
+
+        StringBuilder sbContinentalTotalUrl = new StringBuilder(100);
+        sbContinentalTotalUrl.append(config.getBaseUrl())
+                .append(config.getContinentalResource())
+                .append("?yesterday=").append(yesterday)
+                .append("&twoDaysAgo=").append(twoDaysAgo)
+                .append("&strict=").append(strict)
+                .append("&allowNull=").append(allowNull);
+
+        HttpRequest request = HttpRequest
+                .newBuilder(URI.create(sbContinentalTotalUrl.toString()))
+                .header("Content-Type", "application/json")
+                .GET()
+                .build();
+
+        CompletableFuture<HttpResponse<String>> response = HTTP_CLIENT
+                .sendAsync(request, HttpResponse.BodyHandlers.ofString());
+
+        response.thenAccept(res -> System.out.println(res));
+
+        List<ContinentalTotal> continentalTotals = JSONUtils
+                .convertFromJsonToList(
+                        response.get().body(),
+                        new TypeReference<List<ContinentalTotal>>() {
+                });
+
+        Optional<ContinentalTotal> continentalTotal = Optional.empty();
+        if (response.get().statusCode() == 500) {
+            System.out.println("Continental Total Not Avaialble");
+        } else {
+            continentalTotal = continentalTotals.stream()
+                    .filter(ct -> ct.getContinent().equalsIgnoreCase(continent))
+                    .findFirst();
+        }
+        response.join();
+
+        return continentalTotal;
+    }
+
+    @Override
+    public List<ContinentalTotal> getContinentalTotals(
+            boolean yesterday, 
+            boolean twoDaysAgo, 
+            boolean strict, 
+            boolean allowNull
+    ) throws InterruptedException, ExecutionException, IOException {
+        
+        StringBuilder sbContinentalTotalUrl = new StringBuilder(100);
+        sbContinentalTotalUrl.append(config.getBaseUrl())
+                .append(config.getContinentalResource())
+                .append("?yesterday=").append(yesterday)
+                .append("&twoDaysAgo=").append(twoDaysAgo)
+                .append("&strict=").append(strict)
+                .append("&allowNull=").append(allowNull);
+
+        HttpRequest request = HttpRequest
+                .newBuilder(URI.create(sbContinentalTotalUrl.toString()))
+                .header("Content-Type", "application/json")
+                .GET()
+                .build();
+
+        CompletableFuture<HttpResponse<String>> response = HTTP_CLIENT
+                .sendAsync(request, HttpResponse.BodyHandlers.ofString());
+
+        response.thenAccept(res -> System.out.println(res));
+
+        List<ContinentalTotal> continentalTotals = JSONUtils
+                .convertFromJsonToList(
+                        response.get().body(),
+                        new TypeReference<List<ContinentalTotal>>() {
+                });
+
+        if (response.get().statusCode() == 500) {
+            System.out.println("Continental Totals Not Avaialble");
+        } else {
+            continentalTotals.forEach(System.out::println);
+        }
+        response.join();
+        return continentalTotals;
+    }
 
 }
