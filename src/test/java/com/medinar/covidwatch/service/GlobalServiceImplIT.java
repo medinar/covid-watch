@@ -1,7 +1,6 @@
 package com.medinar.covidwatch.service;
 
 import com.medinar.covidwatch.domain.GlobalTotal;
-import static org.assertj.core.internal.Bytes.instance;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -47,16 +46,10 @@ public class GlobalServiceImplIT {
      * Test of getTotal method, of class GlobalServiceImpl.
      */
     @Test
-    public void testGetTotal() throws Exception {
+    public void testGetTotalHappyPath() throws Exception {
         System.out.println("getTotal");
-        boolean yesterday = false;
-        boolean twoDaysAgo = false;
-        boolean allowNull = false;
-        GlobalTotal expResult = null;
-        GlobalTotal result = globalService.getTotal(yesterday, twoDaysAgo, allowNull);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        GlobalTotal result = globalService.getTotal(false, false, false);        
+        assertNotNull(result);
     }
     
 }
