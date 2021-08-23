@@ -14,25 +14,49 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 public class JSONUtils {
 
-    //convert JSON into List of Objects
-    static public <T> List<T> convertFromJsonToList(
-            String json, 
-            TypeReference<List<T>> var
+    /**
+     * Converts JSON String into List of Java objects
+     *
+     * @param <T> Type
+     * @param json JSON String
+     * @param list Generic type of list
+     * @return List of Java objects derived from the JSON String
+     * @throws JsonParseException
+     * @throws JsonMappingException
+     * @throws IOException
+     */
+    public static <T> List<T> convertFromJsonToList(
+            String json,
+            TypeReference<List<T>> list
     ) throws JsonParseException, JsonMappingException, IOException {
         ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(json, var);
+        return mapper.readValue(json, list);
     }
 
-    //Generic Type Safe Method – convert JSON into Object
-    static public <T> T covertFromJsonToObject(
-            String json, 
-            Class<T> var
+    /**
+     * Convert JSON String into Java object
+     *
+     * @param <T> Type
+     * @param json JSON String
+     * @param obj Type of object
+     * @return Java object derived from the JSON String
+     * @throws IOException
+     */
+    public static <T> T covertFromJsonToObject(
+            String json,
+            Class<T> obj
     ) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(json, var);//Convert Json into object of Specific Type
+        return mapper.readValue(json, obj);
     }
 
-    // convert Object into JSON
+    /**
+     * Converts an object into JSON
+     *
+     * @param obj Object to be converted
+     * @return JSON derived from the given Java object
+     * @throws JsonProcessingException
+     */
     public static String covertFromObjectToJson(
             Object obj
     ) throws JsonProcessingException {

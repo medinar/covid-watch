@@ -103,7 +103,10 @@ public class InternationalServiceImpl implements InternationalService {
         if (response.get().statusCode() == 500) {
             System.out.println("Country Not Avaialble");
         } else {
-            internationalTotal = JSONUtils.covertFromJsonToObject(response.get().body(), InternationalTotal.class);
+            internationalTotal = JSONUtils.covertFromJsonToObject(
+                    response.get().body(), 
+                    InternationalTotal.class
+            );
             System.out.println(internationalTotal);
         }
         response.join();
