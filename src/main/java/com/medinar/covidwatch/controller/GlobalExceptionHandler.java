@@ -33,18 +33,11 @@ public class GlobalExceptionHandler {
         return mv;
     }
 
-    @ExceptionHandler(InterruptedException.class)
+    @ExceptionHandler({
+        InterruptedException.class,
+        ExecutionException.class
+    })
     public ModelAndView handleInterruptedException(Exception ex) {
-
-        var mv = new ModelAndView();
-        mv.addObject(MSG, ex.getMessage());
-        mv.setViewName("error/500");
-
-        return mv;
-    }
-
-    @ExceptionHandler(ExecutionException.class)
-    public ModelAndView handleExecutionException(Exception ex) {
 
         var mv = new ModelAndView();
         mv.addObject(MSG, ex.getMessage());
