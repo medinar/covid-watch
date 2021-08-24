@@ -10,6 +10,7 @@ import static com.medinar.covidwatch.constant.Constants.NOT_FOUND_CODE;
 import static com.medinar.covidwatch.constant.Constants.TWODAYSAGO_REQ_PARAM;
 import static com.medinar.covidwatch.constant.Constants.YESTERDAY_REQ_PARAM;
 import com.medinar.covidwatch.domain.GlobalTotal;
+import com.medinar.covidwatch.exception.GlobalCasesNotFoundException;
 import com.medinar.covidwatch.utility.JSONUtils;
 import java.io.IOException;
 import java.net.URI;
@@ -38,9 +39,11 @@ public class GlobalClientImpl extends AbstractClient implements GlobalClient {
             boolean yesterday,
             boolean twoDaysAgo,
             boolean allowNull
-    ) throws InterruptedException, ExecutionException, IOException {
+    ) throws InterruptedException, ExecutionException, IOException, GlobalCasesNotFoundException {
 
-        log.info("CovidApiConfig ::: {}", config.toString());
+        if (log.isDebugEnabled()) {
+            log.debug("CovidApiConfig ::: {}", config.toString());
+        }
 
         StringBuilder sbGlobalTotalUrl = new StringBuilder(100);
         sbGlobalTotalUrl.append(config.getBaseUrl())
@@ -68,20 +71,16 @@ public class GlobalClientImpl extends AbstractClient implements GlobalClient {
         response.thenAccept(res -> log.info(res.toString()));
 
         GlobalTotal globalTotal = null;
-        switch (response.get().statusCode()) {
-            case INTERNAL_SERVER_CODE:
-                log.error(INTERNAL_SERVER_ERROR);
-                break;
-            case NOT_FOUND_CODE:
-                log.error(ENTRY_NOT_FOUND_ERROR);
-                break;
-            default:
-                globalTotal = JSONUtils.covertFromJsonToObject(
-                        response.get().body(),
-                        GlobalTotal.class
-                );
-                log.info(globalTotal.toString());
-                break;
+        if (response.get().statusCode() == INTERNAL_SERVER_CODE) {
+            log.error(INTERNAL_SERVER_ERROR);
+            throw new GlobalCasesNotFoundException("Global totals not available");
+        }
+        else {
+            globalTotal = JSONUtils.covertFromJsonToObject(
+                    response.get().body(),
+                    GlobalTotal.class
+            );
+            log.info(globalTotal.toString());
         }
         response.join();
         return globalTotal;

@@ -73,7 +73,7 @@ public class ContinentalClientImpl extends AbstractClient implements Continental
         Optional<ContinentalTotal> continentalTotal;
         if (response.get().statusCode() == INTERNAL_SERVER_CODE) {
             log.error(INTERNAL_SERVER_ERROR);
-            throw new ContinentNotFoundException("Continental Totals not Available");
+            throw new ContinentNotFoundException("Continental total not available");
         } else {
             continentalTotal = continentalTotals.stream()
                     .filter(ct -> ct.getContinent().equalsIgnoreCase(continent))

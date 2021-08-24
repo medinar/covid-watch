@@ -1,6 +1,7 @@
 package com.medinar.covidwatch.service;
 
 import com.medinar.covidwatch.domain.GlobalTotal;
+import com.medinar.covidwatch.exception.GlobalCasesNotFoundException;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
@@ -24,6 +25,6 @@ public interface GlobalService {
             boolean yesterday,
             boolean twoDaysAgo,
             boolean allowNull
-    ) throws InterruptedException, ExecutionException, IOException;
+    ) throws InterruptedException, ExecutionException, IOException, GlobalCasesNotFoundException;
         
 }
