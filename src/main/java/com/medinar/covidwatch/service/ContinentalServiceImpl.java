@@ -2,6 +2,7 @@ package com.medinar.covidwatch.service;
 
 import com.medinar.covidwatch.client.ContinentalClient;
 import com.medinar.covidwatch.domain.ContinentalTotal;
+import com.medinar.covidwatch.exception.ContinentNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
@@ -26,7 +27,7 @@ public class ContinentalServiceImpl implements ContinentalService {
             boolean twoDaysAgo,
             boolean strict,
             boolean allowNull
-    ) throws InterruptedException, ExecutionException, IOException {
+    ) throws InterruptedException, ExecutionException, IOException, ContinentNotFoundException {
 
         return client.getContinentalTotal(
                 continent,

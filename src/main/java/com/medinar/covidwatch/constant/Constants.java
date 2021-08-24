@@ -5,14 +5,16 @@ package com.medinar.covidwatch.constant;
  * @author Rommel Medina
  */
 public class Constants {
-    
+
     private Constants() {
     }
-    
+
     public static final String CONTENT_TYPE = "Content-Type";
-    public static final String  INTERNAL_SERVER_ERROR = "Internal Server Error";
-    public static final String  ENTRY_NOT_FOUND_ERROR = "Entry Not Found Error";
-    
+    public static final String INTERNAL_SERVER_ERROR = "Internal Server Error";
+    public static final String ENTRY_NOT_FOUND_ERROR = "Entry Not Found Error";
+    public static final int NOT_FOUND_CODE = 404;
+    public static final int INTERNAL_SERVER_CODE = 500;
+
     public static final String YESTERDAY_REQ_PARAM = "?yesterday=";
     public static final String TWODAYSAGO_REQ_PARAM = "&twoDaysAgo=";
     public static final String STRICT_REQ_PARAM = "&strict=";

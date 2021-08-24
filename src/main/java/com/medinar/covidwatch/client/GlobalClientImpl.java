@@ -4,8 +4,9 @@ import com.medinar.covidwatch.config.CovidApiConfig;
 import static com.medinar.covidwatch.constant.Constants.ALLWNULL_REQ_PARAM;
 import static com.medinar.covidwatch.constant.Constants.CONTENT_TYPE;
 import static com.medinar.covidwatch.constant.Constants.ENTRY_NOT_FOUND_ERROR;
+import static com.medinar.covidwatch.constant.Constants.INTERNAL_SERVER_CODE;
 import static com.medinar.covidwatch.constant.Constants.INTERNAL_SERVER_ERROR;
-import static com.medinar.covidwatch.constant.Constants.STRICT_REQ_PARAM;
+import static com.medinar.covidwatch.constant.Constants.NOT_FOUND_CODE;
 import static com.medinar.covidwatch.constant.Constants.TWODAYSAGO_REQ_PARAM;
 import static com.medinar.covidwatch.constant.Constants.YESTERDAY_REQ_PARAM;
 import com.medinar.covidwatch.domain.GlobalTotal;
@@ -68,10 +69,10 @@ public class GlobalClientImpl extends AbstractClient implements GlobalClient {
 
         GlobalTotal globalTotal = null;
         switch (response.get().statusCode()) {
-            case 500:
+            case INTERNAL_SERVER_CODE:
                 log.error(INTERNAL_SERVER_ERROR);
                 break;
-            case 400:
+            case NOT_FOUND_CODE:
                 log.error(ENTRY_NOT_FOUND_ERROR);
                 break;
             default:
