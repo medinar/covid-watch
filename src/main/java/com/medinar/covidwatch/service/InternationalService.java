@@ -1,6 +1,7 @@
 package com.medinar.covidwatch.service;
 
 import com.medinar.covidwatch.domain.InternationalTotal;
+import com.medinar.covidwatch.exception.InternationalCasesNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -34,7 +35,7 @@ public interface InternationalService {
     /**
      * Retrieves the total cases of for the given country
      *
-     * @param continent Name of the continent
+     * @param country Name of the country
      * @param yesterday Queries data reported a day ago
      * @param twoDaysAgo Queries data reported two days ago
      * @param strict Setting to false gives you the ability to fuzzy search
@@ -52,7 +53,7 @@ public interface InternationalService {
             boolean twoDaysAgo,
             boolean strict,
             boolean allowNull
-    ) throws InterruptedException, ExecutionException, IOException;
+    ) throws InterruptedException, ExecutionException, IOException, InternationalCasesNotFoundException;
 
     /* 
      * Retrieves the list of totals in different countries for the given continent

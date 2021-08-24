@@ -1,6 +1,7 @@
 package com.medinar.covidwatch.client;
 
 import com.medinar.covidwatch.domain.InternationalTotal;
+import com.medinar.covidwatch.exception.InternationalCasesNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -17,7 +18,7 @@ public interface InternationalClient {
             boolean twoDaysAgo,
             boolean strict,
             boolean allowNull
-    ) throws InterruptedException, ExecutionException, IOException;
+    ) throws InterruptedException, ExecutionException, IOException, InternationalCasesNotFoundException;
 
     /**
      *

@@ -13,6 +13,7 @@ import static com.medinar.covidwatch.constant.Constants.STRICT_REQ_PARAM;
 import static com.medinar.covidwatch.constant.Constants.TWODAYSAGO_REQ_PARAM;
 import static com.medinar.covidwatch.constant.Constants.YESTERDAY_REQ_PARAM;
 import com.medinar.covidwatch.domain.InternationalTotal;
+import com.medinar.covidwatch.exception.InternationalCasesNotFoundException;
 import com.medinar.covidwatch.utility.JSONUtils;
 import java.io.IOException;
 import java.net.URI;
@@ -45,7 +46,7 @@ public class InternationalClientImpl extends AbstractClient implements Internati
             boolean twoDaysAgo,
             boolean strict,
             boolean allowNull
-    ) throws InterruptedException, ExecutionException, IOException {
+    ) throws InterruptedException, ExecutionException, IOException, InternationalCasesNotFoundException {
 
         StringBuilder sbTotalUrl = new StringBuilder(100);
         sbTotalUrl.append(config.getBaseUrl())
@@ -71,10 +72,10 @@ public class InternationalClientImpl extends AbstractClient implements Internati
         switch (response.get().statusCode()) {
             case INTERNAL_SERVER_CODE:
                 log.error(INTERNAL_SERVER_ERROR);
-                break;
-            case 404:
+                throw new InternationalCasesNotFoundException("Ineternational totals not available");
+            case NOT_FOUND_CODE:
                 log.error("Country not found");
-                break;
+                throw new InternationalCasesNotFoundException("Inetrnational totals not found for " + country);
             default:
                 internationalTotal = JSONUtils.covertFromJsonToObject(
                         response.get().body(),
