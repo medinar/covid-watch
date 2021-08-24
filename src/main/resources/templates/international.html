@@ -54,64 +54,137 @@
             </nav>
         </section>
 
-        <section id="main">
-            <h2>Cases Overview</h2>
-            <p><img th:src="${flag}" width="60px"/><span th:text="${#uris.unescapeQueryParam(country)}"></span></p>
-
-            <br>
-
-
-            <h3>Coronavirus Cases:</h3>
-            <h4 th:text="${cases}"></h4>
-
-            <h3>Deaths:</h3>
-            <h4 th:text="${deaths}"></h4>
-
-            <h3>Recovered:</h3>
-            <h4 th:text="${recovered}"></h4>
-
-        </section>
-        <hr>
         <section>
-            <div>
-                <h6>Active Cases %</h6>
-                <h1 th:text="${activePercentage}"></h1>
-                <br>
-                <h6>Total Active Cases</h6>
-                <h1 th:text="${active}"></h1>
-                <br>
-                <h6>Recoveries %</h6>
-                <h1 th:text="${recoveredPercentage}"></h1>
-                <br>
-                <h6>Total Recoveries</h6>
-                <h1 th:text="${recovered}"></h1>
-                <br>
-                <h6>Deaths %</h6>
-                <h1 th:text="${deathPercentage}"></h1>
-                <br>
-                <h6>Total Deaths</h6>
-                <h1 th:text="${deaths}"></h1>
+            <div class="jumbotron container mb-3 mt-3">
+                <div class="d-flex flex-row">
+                    <div class="p-2"><img th:src="${flag}" width="100px"/></div>
+                    <div class="p-2"><h1 th:text="${#uris.unescapeQueryParam(country)}" class="display-4"></h1></div>
+                </div>
+                <p class="lead">
+                    There have been at least 
+                    <strong>
+                        <span th:text="${cases}" class="digits"></span>
+                    </strong> 
+                    reported infections and 
+                    <strong>
+                        <span th:text="${deaths}" class="digits"></span>
+                    </strong> 
+                    reported deaths caused by the novel coronavirus in 
+                    <span th:text="${#uris.unescapeQueryParam(country)}"></span>                    
+                    so far.
+                </p>
+            </div>    
+        </section>
 
-                <br>
-                <h6>New Cases</h6>
-                <h1 th:text="${todayCases}"></h1>
-                <br>
-                <h6>New Recoveries</h6>
-                <h1 th:text="${todayRecovered}"></h1>
-                <br>
-                <h6>New Deaths</h6>
-                <h1 th:text="${todayDeaths}"></h1>
+        <section id="main">
+            <br><br>
+            <div class="container mb-3 mt-3">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="card bg-info text-light">
+                            <div class="card-body">
+                                <h5 th:text="${recovered}" class="card-title digits"></h5>
+                                <p class="card-text">Total Recoveries</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card bg-info text-light">
+                            <div class="card-body">
+                                <h5 class="card-title" th:text="${recoveredPercentage}"></h5>
+                                <p class="card-text">Recoveries %</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+            <div class="container mb-3 mt-3">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="card bg-warning text-light">
+                            <div class="card-body">
+                                <h5 th:text="${active}" class="card-title digits"></h5>
+                                <p class="card-text">Total Active Cases</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card bg-warning text-light">
+                            <div class="card-body">
+                                <h5 class="card-title" th:text="${activePercentage}"></h5>
+                                <p class="card-text">Active Cases %</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+            <div class="container mb-3 mt-3">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="card bg-danger text-light">
+                            <div class="card-body">
+                                <h5 th:text="${deaths}" class="card-title digits"></h5>
+                                <p class="card-text">Total Deaths</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card bg-danger text-light">
+                            <div class="card-body">
+                                <h5 class="card-title" th:text="${deathPercentage}"></h5>
+                                <p class="card-text">Deaths %</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+            <br>
+            <div class="container mb-3 mt-3">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="card bg-info text-light">
+                            <div class="card-body">
+                                <h5 th:text="${todayCases}" class="card-title digits"></h5>
+                                <p class="card-text">New Cases</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="card bg-success text-light">
+                            <div class="card-body">
+                                <h5 class="card-title digits" th:text="${todayRecovered}"></h5>
+                                <p class="card-text">New Recoveries</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="card bg-danger text-light">
+                            <div class="card-body">
+                                <h5 class="card-title digits" th:text="${todayDeaths}"></h5>
+                                <p class="card-text">New Deaths</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+            <br>
+            <div class="container mb-3 mt-3">
+                <div class="card bg-success text-light">
+                    <div class="card-body">
+                        <h5>
+                            Closed Cases 
+                            <span th:text="${closed}"></span>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="mx-auto" style="width: 10px">
+                <button type="button" onclick="goBack()" class="btn btn-secondary btn-lg">Back</button>
             </div>
         </section>
 
-        <hr>
-        <section>
 
-            <h3>Closed Cases:</h3>
-            <h4 th:text="${closed}"></h4>
-        </section>
-
-        <button onclick="goBack()">Back</button>
         <br><br><br><br><br>
         <hr>
         <section id="footer">
@@ -136,7 +209,7 @@
                     <!-- Footer Elements -->
 
                     <div class="footer-copyright text-center py-3">
-                        <a href="#"> medinar.com</a>
+                        <a href="#navigation">www.covid-watch.com</a>
                     </div>
 
                 </footer>
