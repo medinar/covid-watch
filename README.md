@@ -35,7 +35,7 @@ The application uses the standard MVC architecture. The controller layer consist
 
 
 
-### Packages
+### Source Packages
 
 - **config** - contains the Java Configuration files
 - **controller** - contains the Controller classes
@@ -43,11 +43,18 @@ The application uses the standard MVC architecture. The controller layer consist
 - **service** - contains the Service classes
 - **utility** - contains utility class
 
+### Test Packages
+
+- **controller**
+- **service**
+
 ### Domains
 
 1. Global
 2. Continental
 3. International
+
+
 
 ## Getting Started
 

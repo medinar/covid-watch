@@ -2,14 +2,18 @@ package com.medinar.covidwatch.service;
 
 import com.medinar.covidwatch.client.ContinentalClient;
 import com.medinar.covidwatch.domain.ContinentalTotal;
+import com.medinar.covidwatch.exception.ContinentalCasesNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import static org.junit.Assert.*;
+import org.junit.Rule;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.rules.ExpectedException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import static org.mockito.Mockito.when;
@@ -62,6 +66,27 @@ public class ContinentalServiceImplTest {
     }
 
     /**
+     * Test of getTotal method, of class ContinentalServiceImpl.
+     *
+     * @throws java.lang.Exception
+     */
+    @Test
+    public void testGetContinentalTotalUnhappyPath() throws Exception {
+        System.out.println("getContinentalTotal");
+        String continent = "Pangea";
+        String expectedMessage = "Continent not found: " + continent;
+
+        Exception exception = assertThrows(ContinentalCasesNotFoundException.class, () -> {
+            Optional<ContinentalTotal> result = service
+                    .getTotal(continent, false, false, true, false);
+
+        });
+
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    /**
      * Test of getTotals method, of class ContinentalServiceImpl.
      *
      * @throws java.lang.Exception
@@ -85,7 +110,7 @@ public class ContinentalServiceImplTest {
 
         when(mockClient.getContinentalTotals(false, false, true, false))
                 .thenReturn(mockList);
-        
+
         List<ContinentalTotal> result = service.getTotals(
                 false, false, true, false
         );
@@ -95,7 +120,7 @@ public class ContinentalServiceImplTest {
         assertEquals(cases1, result.get(0).getCases());
         assertEquals(continent, result.get(1).getContinent());
         assertEquals(cases2, result.get(1).getCases());
-        
+
     }
 
 }
