@@ -94,7 +94,9 @@ public class InternationalController {
         } catch (InternationalCasesNotFoundException ex) {
             log.error("InternationalCasesNotFoundException handler executed", ex);
             throw new ResponseStatusException(NOT_FOUND, ex.getMessage(), ex);
+            
         }
         return "international";
     }
+
 }

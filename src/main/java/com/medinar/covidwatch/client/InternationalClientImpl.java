@@ -72,10 +72,10 @@ public class InternationalClientImpl extends AbstractClient implements Internati
         switch (response.get().statusCode()) {
             case INTERNAL_SERVER_CODE:
                 log.error(INTERNAL_SERVER_ERROR);
-                throw new InternationalCasesNotFoundException("Ineternational totals not available");
+                throw new InternationalCasesNotFoundException("International totals not available");
             case NOT_FOUND_CODE:
-                log.error("Country not found");
-                throw new InternationalCasesNotFoundException("Ineternational totals not found for " + country);
+                log.error("International totals not found for {}", country);
+                throw new InternationalCasesNotFoundException("International totals not found for " + country);
             default:
                 internationalTotal = JSONUtils.covertFromJsonToObject(
                         response.get().body(),
