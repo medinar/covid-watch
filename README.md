@@ -20,6 +20,8 @@ The application uses the standard MVC architecture. The controller layer consist
 - The Continent Page also displays a table of countries with its corresponding details
 - A Country Page that displays details such as total cases, new cases, active cases, etc
 
+
+
 ### Screens
 
 #### Home
@@ -93,7 +95,7 @@ What things you need to install the software and how to install them
 ```
 GitHub Account
 Java 11
-IDE (Developed using Netbeans 12.1)
+IDE (Developed using Netbeans 12.1) or STS for Eclipse or IntelliJ
 ```
 
 ## Installing
@@ -110,23 +112,40 @@ IDE (Developed using Netbeans 12.1)
 
 4. Run the project.
 
+5. Open a browser.
+
+6. Copy and paste to the address bar and press enter:
+   ```
+   localhost:9001/covid-watch/global
+   ```
+
+
+
 ## Running the tests
 
-1. Right click on the project then click Run Tests.
-2. Check the results.
+1. On the Project Explorer, select the test files.
+
+2. Right click on the test files then click Test File (Ctrl + F6).
+
+3. Check the results.
+
+   <img src="./README/test-result.png" alt="image-20210824161343099" style="zoom: 80%;" />
+
+
 
 ## Built With
 
-- [Java](https://www.java.com/en/)
-- [Spring](https://spring.io/)
-- [Spring Boot](https://spring.io/projects/spring-boot)
-- [Thymeleaf](https://www.thymeleaf.org)
-- [Bootstrap](https://getbootstrap.com/)
+- [Java](https://www.java.com/en/) - a programming language used to develop enterprise applications
+- [Spring](https://spring.io/) - a framework which provides a comprehensive programming and configuration model for modern Java-based enterprise applications
+- [Spring Boot](https://spring.io/projects/spring-boot) - a tool for developing Spring based Java web applications and APIs faster and easier
+- [Thymeleaf](https://www.thymeleaf.org) - an XML/XHTML/HTML5 template engine that is able to apply a set of transformations to template files in order to display data and/or text produced by web applications
+- [Bootstrap](https://getbootstrap.com/) - a CSS Framework for developing responsive and mobile-first websites.
+- [DataTables](https://datatables.net/) -  is a powerful Javascript library for adding interaction features to HTML tables
+- [JUnit](https://junit.org/) -  a unit testing framework for Java programming language
+- [Mockito](https://site.mockito.org/) - is a mocking framework, JAVA-based library that is used for effective unit testing of JAVA applications
 
 ## Author
 
 - **Rommel D. Medina** - [Profile: medinar](https://github.com/medinar)
 
-## License
-
-## Acknowledgments
+## 
