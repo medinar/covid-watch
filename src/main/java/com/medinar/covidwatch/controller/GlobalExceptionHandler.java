@@ -17,12 +17,12 @@ import org.springframework.web.servlet.ModelAndView;
 public class GlobalExceptionHandler {
 
     private static final String MSG = "message";
-    
+
     @ExceptionHandler({
-            GlobalCasesNotFoundException.class,
-            ContinentalCasesNotFoundException.class,
-            InternationalCasesNotFoundException.class,
-            IOException.class
+        GlobalCasesNotFoundException.class,
+        ContinentalCasesNotFoundException.class,
+        InternationalCasesNotFoundException.class,
+        IOException.class
     })
     public ModelAndView handle(Exception ex) {
 
@@ -32,7 +32,7 @@ public class GlobalExceptionHandler {
 
         return mv;
     }
-    
+
     @ExceptionHandler(InterruptedException.class)
     public ModelAndView handleInterruptedException(Exception ex) {
 
@@ -42,7 +42,7 @@ public class GlobalExceptionHandler {
 
         return mv;
     }
-    
+
     @ExceptionHandler(ExecutionException.class)
     public ModelAndView handleExecutionException(Exception ex) {
 
@@ -52,14 +52,5 @@ public class GlobalExceptionHandler {
 
         return mv;
     }
-    
-//    @ExceptionHandler(Exception.class)
-//    public ModelAndView handleException(Exception ex) {
-//
-//        var mv = new ModelAndView();
-//        mv.addObject(MSG, ex.getMessage());
-//        mv.setViewName("error/generic");
-//
-//        return mv;
-//    }
+
 }

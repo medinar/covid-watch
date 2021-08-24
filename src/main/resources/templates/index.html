@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
     </head>
-    
+
     <body>
         <section id="navigation">
             <nav class="navbar navbar-expand-lg navbar-light bg-light static-top mb-5 shadow">
@@ -86,7 +86,7 @@
                 <br>
                 <div class="row">
                     <div class="mx-auto">
-                        <img src="assets/pexels-markus-spiske-3970329.jpg" alt="" width="680px" height="320px" />
+                        <img src="assets/image-20210823224814744.png" alt="" width="680px" height="320px" />
                     </div>
                 </div>
                 <br><br><br><br><br>
@@ -108,26 +108,40 @@
                 <br><br><br><br><br>
 
                 <div class="row">
-                    <div class="col">
+                    <div class="mx-auto">
                         <h3>
-                            <small class="text-muted">Active Cases</small><br>
                             <span th:text="${active}" class="digits"></span> 
-                        </h3>                        
+                            <small class="text-muted"> Active Cases</small>
+                        </h3>
                     </div>
-                    <div class="col"><img src="assets/recovery.jpg" alt="" class="img-thumbnail" /></div>
-                    <div class="col">
-                        <h3>
-                            <small class="text-muted">Closed Cases</small><br>
-                            <span th:text="${closed}" class="digits"></span> 
-                        </h3> 
-                        <div class="col"><img src="assets/recovery.jpg" alt="" class="img-thumbnail" /></div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="mx-auto">
+                        <img src="assets/image-20210823224542889.png" alt="" width="680px" height="320px" />
                     </div>
+                </div>
 
-                </div>    
+                <br><br><br><br><br>
+
+                <div class="row">
+                    <div class="mx-auto">
+                        <h3>
+                            <span th:text="${closed}" class="digits"></span> 
+                            <small class="text-muted"> Closed Cases</small>
+                        </h3>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="mx-auto">
+                        <img src="assets/shutterstock_1703999134_h1.jpg" alt="" width="680px" height="320px" />
+                    </div>
+                </div>
         </section>
 
         <br><br><br><br><br>
-
+        <hr>
         <section id="footer">
             <div class="container mb-3 mt-3">
                 <!-- Footer -->
@@ -149,11 +163,9 @@
                                         </div>-->
                     <!-- Footer Elements -->
 
-                    <!-- Copyright -->
-                    <div class="footer-copyright text-center py-3">© 2021 Copyright:
-                        <a href="#"> MhelZone.com</a>
+                    <div class="footer-copyright text-center py-3">
+                        <a href="#"> medinar.com</a>
                     </div>
-                    <!-- Copyright -->
 
                 </footer>
                 <!-- Footer -->
