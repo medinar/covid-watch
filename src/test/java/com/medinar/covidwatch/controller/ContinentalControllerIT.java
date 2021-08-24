@@ -40,7 +40,7 @@ public class ContinentalControllerIT {
 
         String expResult = "continental";
         String result = controller.getContinentalTotal(
-                model, continent, false, false, true, false
+                model, continent, false, false, true, "", false
         );
         assertEquals(expResult, result);
     }
@@ -58,7 +58,7 @@ public class ContinentalControllerIT {
 
         Exception exception = assertThrows(ResponseStatusException.class, () -> {
             controller.getContinentalTotal(
-                    model, continent, false, false, true, false
+                    model, continent, false, false, true, "", false
             );
         });
 

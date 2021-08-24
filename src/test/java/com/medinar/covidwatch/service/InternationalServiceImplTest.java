@@ -108,7 +108,7 @@ public class InternationalServiceImplTest {
                 continent,
                 false,
                 false,
-                true,
+                "",
                 false
         )).thenReturn(list);
 
@@ -116,7 +116,7 @@ public class InternationalServiceImplTest {
                 continent,
                 false,
                 false,
-                true,
+                "",
                 false
         );
 

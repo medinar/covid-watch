@@ -97,23 +97,25 @@ public class InternationalClientImpl extends AbstractClient implements Internati
             String continent,
             boolean yesterday,
             boolean twoDaysAgo,
-            boolean strict,
+            String sortBy,
             boolean allowNull
     ) throws InterruptedException,
             ExecutionException,
             IOException,
             InternationalCasesNotFoundException {
 
-        StringBuilder sbContinentalTotalUrl = new StringBuilder(100);
-        sbContinentalTotalUrl.append(config.getBaseUrl())
+        StringBuilder sbInternationalTotalUrl = new StringBuilder(100);
+        sbInternationalTotalUrl.append(config.getBaseUrl())
                 .append(config.getInternationalResource())
                 .append(YESTERDAY_REQ_PARAM).append(yesterday)
-                .append(TWODAYSAGO_REQ_PARAM).append(twoDaysAgo)
-                .append(STRICT_REQ_PARAM).append(strict)
-                .append(ALLWNULL_REQ_PARAM).append(allowNull);
+                .append(TWODAYSAGO_REQ_PARAM).append(twoDaysAgo);
+        if (!sortBy.isBlank()) {
+            sbInternationalTotalUrl.append(SORT_REQ_PARAM).append(sortBy);
+        }
+        sbInternationalTotalUrl.append(ALLWNULL_REQ_PARAM).append(allowNull);
 
         HttpRequest request = HttpRequest
-                .newBuilder(URI.create(sbContinentalTotalUrl.toString()))
+                .newBuilder(URI.create(sbInternationalTotalUrl.toString()))
                 .header(CONTENT_TYPE, APPLICATION_JSON_VALUE)
                 .GET()
                 .build();

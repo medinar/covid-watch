@@ -65,7 +65,7 @@ public class InternationalServiceImpl implements InternationalService {
             String continent,
             boolean yesterday,
             boolean twoDaysAgo,
-            boolean strict,
+            String sortBy,
             boolean allowNull
     ) throws InterruptedException,
             ExecutionException,
@@ -76,7 +76,7 @@ public class InternationalServiceImpl implements InternationalService {
                 continent,
                 yesterday,
                 twoDaysAgo,
-                strict,
+                sortBy,
                 allowNull
         );
     }

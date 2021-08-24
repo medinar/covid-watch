@@ -82,7 +82,7 @@ public interface InternationalService {
             String continent,
             boolean yesterday,
             boolean twoDaysAgo,
-            boolean strict,
+            String sortBy,
             boolean allowNull
     ) throws InterruptedException,
             ExecutionException,

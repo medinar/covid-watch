@@ -26,6 +26,8 @@ public class InternationalServiceImplIT {
 
     /**
      * Test of getTotals method, of class InternationalServiceImpl.
+     *
+     * @throws java.lang.Exception
      */
     @Test
     public void testGetTotalsHappyPath() throws Exception {
@@ -36,6 +38,8 @@ public class InternationalServiceImplIT {
 
     /**
      * Test of getTotal method, of class InternationalServiceImpl.
+     *
+     * @throws java.lang.Exception
      */
     @Test
     public void testGetTotalHappyPath() throws Exception {
@@ -70,13 +74,15 @@ public class InternationalServiceImplIT {
 
     /**
      * Test of getTotalsbyContinent method, of class InternationalServiceImpl.
+     *
+     * @throws java.lang.Exception
      */
     @Test
     public void testGetTotalsbyContinentHappyPath() throws Exception {
         System.out.println("getTotalsbyContinent");
         String continent = "Asia";
         List<InternationalTotal> result = service
-                .getTotalsbyContinent(continent, false, false, true, false);
+                .getTotalsbyContinent(continent, false, false, "", false);
         assertNotNull(result.get(0));
         assertEquals(continent, result
                 .stream().filter(total -> total.getContinent().equals(continent))
@@ -88,13 +94,15 @@ public class InternationalServiceImplIT {
 
     /**
      * Test of getTotalsbyContinent method, of class InternationalServiceImpl.
+     *
+     * @throws java.lang.Exception
      */
     @Test
     public void testGetTotalsbyContinentUnhappyPath() throws Exception {
         System.out.println("getTotalsbyContinent");
         String continent = "Not continent";
         List<InternationalTotal> result = service
-                .getTotalsbyContinent(continent, false, false, true, false);
+                .getTotalsbyContinent(continent, false, false, "", false);
         assertTrue(result.isEmpty());
     }
 

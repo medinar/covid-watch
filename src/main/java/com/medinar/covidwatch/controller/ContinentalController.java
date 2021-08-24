@@ -3,6 +3,7 @@ package com.medinar.covidwatch.controller;
 import com.medinar.covidwatch.domain.ContinentalTotal;
 import com.medinar.covidwatch.domain.InternationalTotal;
 import com.medinar.covidwatch.exception.ContinentalCasesNotFoundException;
+import com.medinar.covidwatch.exception.InternationalCasesNotFoundException;
 import com.medinar.covidwatch.service.ContinentalService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,7 @@ public class ContinentalController {
             @RequestParam(required = false) boolean yesterday,
             @RequestParam(required = false) boolean twoDaysAgo,
             @RequestParam(required = false) boolean strict,
+            @RequestParam(required = false) String sortBy,
             @RequestParam(required = false) boolean allowNull
     ) {
 
@@ -59,7 +61,7 @@ public class ContinentalController {
                                 continent,
                                 yesterday,
                                 twoDaysAgo,
-                                strict,
+                                sortBy,
                                 allowNull
                         );
 
@@ -76,25 +78,25 @@ public class ContinentalController {
             log.error("InterruptedException handler executed", ex);
             Thread.currentThread().interrupt();
             throw new ResponseStatusException(
-                    HttpStatus.INTERNAL_SERVER_ERROR, 
-                    "InterruptedException occured", 
+                    HttpStatus.INTERNAL_SERVER_ERROR,
+                    "InterruptedException occured",
                     ex
             );
         } catch (ExecutionException ex) {
             log.error("ExecutionException handler executed", ex);
             throw new ResponseStatusException(
-                    HttpStatus.INTERNAL_SERVER_ERROR, 
-                    "ExecutionException occured", 
+                    HttpStatus.INTERNAL_SERVER_ERROR,
+                    "ExecutionException occured",
                     ex
             );
         } catch (IOException ex) {
             log.error("IOException handler executed", ex);
             throw new ResponseStatusException(
-                    NOT_FOUND, 
-                    "IOException occured", 
+                    NOT_FOUND,
+                    "IOException occured",
                     ex
             );
-        } catch (ContinentalCasesNotFoundException ex) {
+        } catch (ContinentalCasesNotFoundException | InternationalCasesNotFoundException ex) {
             log.error("ContinentNotFoundException handler executed", ex);
             throw new ResponseStatusException(NOT_FOUND, continent, ex);
         }
