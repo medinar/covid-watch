@@ -43,7 +43,10 @@ public class ContinentalClientImpl extends AbstractClient implements Continental
             boolean twoDaysAgo,
             boolean strict,
             boolean allowNull
-    ) throws InterruptedException, ExecutionException, IOException, ContinentalCasesNotFoundException {
+    ) throws InterruptedException,
+            ExecutionException,
+            IOException,
+            ContinentalCasesNotFoundException {
 
         StringBuilder sbContinentalTotalUrl = new StringBuilder(100);
         sbContinentalTotalUrl.append(config.getBaseUrl())
@@ -73,7 +76,9 @@ public class ContinentalClientImpl extends AbstractClient implements Continental
         Optional<ContinentalTotal> continentalTotal;
         if (response.get().statusCode() == INTERNAL_SERVER_CODE) {
             log.error(INTERNAL_SERVER_ERROR);
-            throw new ContinentalCasesNotFoundException("Continental total not available");
+            throw new ContinentalCasesNotFoundException(
+                    "Continental total not available"
+            );
         } else {
             continentalTotal = continentalTotals.stream()
                     .filter(ct -> ct.getContinent().equalsIgnoreCase(continent))
@@ -91,7 +96,10 @@ public class ContinentalClientImpl extends AbstractClient implements Continental
             boolean twoDaysAgo,
             boolean strict,
             boolean allowNull
-    ) throws InterruptedException, ExecutionException, IOException {
+    ) throws InterruptedException,
+            ExecutionException,
+            IOException,
+            ContinentalCasesNotFoundException {
 
         StringBuilder sbContinentalTotalUrl = new StringBuilder(100);
         sbContinentalTotalUrl.append(config.getBaseUrl())
@@ -120,7 +128,9 @@ public class ContinentalClientImpl extends AbstractClient implements Continental
 
         if (response.get().statusCode() == INTERNAL_SERVER_CODE) {
             log.error(INTERNAL_SERVER_ERROR);
-            // TOD: Throw error here
+            throw new ContinentalCasesNotFoundException(
+                    "Continental total not available"
+            );
         } else {
             continentalTotals.forEach(total -> log.info(total.toString()));
         }

@@ -1,7 +1,6 @@
 package com.medinar.covidwatch.service;
 
 import com.medinar.covidwatch.client.InternationalClient;
-import com.medinar.covidwatch.config.CovidApiConfig;
 import com.medinar.covidwatch.domain.InternationalTotal;
 import com.medinar.covidwatch.exception.InternationalCasesNotFoundException;
 import java.io.IOException;
@@ -18,9 +17,6 @@ import org.springframework.stereotype.Service;
 public class InternationalServiceImpl implements InternationalService {
 
     @Autowired
-    CovidApiConfig config;
-
-    @Autowired
     InternationalClient client;
 
     @Override
@@ -29,12 +25,15 @@ public class InternationalServiceImpl implements InternationalService {
             boolean twoDaysAgo,
             String sortBy,
             boolean allowNull
-    ) throws InterruptedException, ExecutionException, IOException {
+    ) throws InterruptedException,
+            ExecutionException,
+            IOException,
+            InternationalCasesNotFoundException {
 
         return client.getInternationalTotals(
-                yesterday, 
-                twoDaysAgo, 
-                sortBy, 
+                yesterday,
+                twoDaysAgo,
+                sortBy,
                 allowNull
         );
     }
@@ -46,9 +45,9 @@ public class InternationalServiceImpl implements InternationalService {
             boolean twoDaysAgo,
             boolean strict,
             boolean allowNull
-    ) throws InterruptedException, 
-            ExecutionException, 
-            IOException, 
+    ) throws InterruptedException,
+            ExecutionException,
+            IOException,
             InternationalCasesNotFoundException {
 
         return client.getInternationalTotal(
@@ -68,13 +67,16 @@ public class InternationalServiceImpl implements InternationalService {
             boolean twoDaysAgo,
             boolean strict,
             boolean allowNull
-    ) throws InterruptedException, ExecutionException, IOException {
-        
+    ) throws InterruptedException,
+            ExecutionException,
+            IOException,
+            InternationalCasesNotFoundException {
+
         return client.getInternationalTotalsbyContinent(
-                continent, 
-                yesterday, 
-                twoDaysAgo, 
-                strict, 
+                continent,
+                yesterday,
+                twoDaysAgo,
+                strict,
                 allowNull
         );
     }

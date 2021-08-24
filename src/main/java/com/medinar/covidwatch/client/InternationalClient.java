@@ -12,13 +12,32 @@ import java.util.concurrent.ExecutionException;
  */
 public interface InternationalClient {
 
+    /**
+     * Retrieves the total cases for the given country
+     *
+     * @param country Name of the country
+     * @param yesterday Queries data reported a day ago
+     * @param twoDaysAgo Queries data reported two days ago
+     * @param strict Setting to false gives you the ability to fuzzy search
+     * continents (i.e. Oman vs. rOMANia). Default is true.
+     * @param allowNull By default, if a value is missing, it is returned as 0.
+     * This allows nulls to be returned
+     * @return Total cases for the given country
+     * @throws InterruptedException
+     * @throws ExecutionException
+     * @throws IOException
+     * @throws InternationalCasesNotFoundException
+     */
     public abstract InternationalTotal getInternationalTotal(
             String country,
             boolean yesterday,
             boolean twoDaysAgo,
             boolean strict,
             boolean allowNull
-    ) throws InterruptedException, ExecutionException, IOException, InternationalCasesNotFoundException;
+    ) throws InterruptedException,
+            ExecutionException,
+            IOException,
+            InternationalCasesNotFoundException;
 
     /**
      *
@@ -32,14 +51,19 @@ public interface InternationalClient {
      * @throws InterruptedException
      * @throws ExecutionException
      * @throws IOException
+     * @throws
+     * com.medinar.covidwatch.exception.InternationalCasesNotFoundException
      */
     public abstract List<InternationalTotal> getInternationalTotals(
             boolean yesterday,
             boolean twoDaysAgo,
             String sortBy,
             boolean allowNull
-    ) throws InterruptedException, ExecutionException, IOException;    
-    
+    ) throws InterruptedException,
+            ExecutionException,
+            IOException,
+            InternationalCasesNotFoundException;
+
     /* 
      * Retrieves the list of totals in different countries for the given continent
      *
@@ -59,5 +83,8 @@ public interface InternationalClient {
             boolean twoDaysAgo,
             boolean strict,
             boolean allowNull
-    ) throws InterruptedException, ExecutionException, IOException;
+    ) throws InterruptedException,
+            ExecutionException,
+            IOException,
+            InternationalCasesNotFoundException;
 }

@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.medinar.covidwatch.config.CovidApiConfig;
 import static com.medinar.covidwatch.constant.Constants.ALLWNULL_REQ_PARAM;
 import static com.medinar.covidwatch.constant.Constants.CONTENT_TYPE;
-import static com.medinar.covidwatch.constant.Constants.ENTRY_NOT_FOUND_ERROR;
 import static com.medinar.covidwatch.constant.Constants.INTERNAL_SERVER_CODE;
 import static com.medinar.covidwatch.constant.Constants.INTERNAL_SERVER_ERROR;
 import static com.medinar.covidwatch.constant.Constants.NOT_FOUND_CODE;
@@ -100,7 +99,10 @@ public class InternationalClientImpl extends AbstractClient implements Internati
             boolean twoDaysAgo,
             boolean strict,
             boolean allowNull
-    ) throws InterruptedException, ExecutionException, IOException {
+    ) throws InterruptedException,
+            ExecutionException,
+            IOException,
+            InternationalCasesNotFoundException {
 
         StringBuilder sbContinentalTotalUrl = new StringBuilder(100);
         sbContinentalTotalUrl.append(config.getBaseUrl())
@@ -128,25 +130,23 @@ public class InternationalClientImpl extends AbstractClient implements Internati
 
         List<InternationalTotal> internationalTotalsByContinent = null;
 
-        switch (response.get().statusCode()) {
-            case INTERNAL_SERVER_CODE:
-                log.error(INTERNAL_SERVER_ERROR);
-                break;
-            case NOT_FOUND_CODE:
-                log.error(ENTRY_NOT_FOUND_ERROR);
-                break;
-            default:
-                internationalTotalsByContinent = internationalTotals.stream()
-                        .filter(internationalTotal -> internationalTotal
-                        .getContinent()
-                        .equalsIgnoreCase(continent)
-                        )
-                        .collect(Collectors.toList());
-                internationalTotalsByContinent.forEach(
-                        total -> log.info(total.toString())
-                );
-                break;
+        if (response.get().statusCode() == INTERNAL_SERVER_CODE) {
+            log.error(INTERNAL_SERVER_ERROR);
+            throw new InternationalCasesNotFoundException(
+                    "International totals not available"
+            );
+        } else {
+            internationalTotalsByContinent = internationalTotals.stream()
+                    .filter(internationalTotal -> internationalTotal
+                    .getContinent()
+                    .equalsIgnoreCase(continent)
+                    ).collect(Collectors.toList());
+
+            internationalTotalsByContinent.forEach(
+                    total -> log.info(total.toString())
+            );
         }
+
         response.join();
         return internationalTotalsByContinent;
     }
@@ -157,7 +157,10 @@ public class InternationalClientImpl extends AbstractClient implements Internati
             boolean twoDaysAgo,
             String sortBy,
             boolean allowNull
-    ) throws InterruptedException, ExecutionException, IOException {
+    ) throws InterruptedException,
+            ExecutionException,
+            IOException,
+            InternationalCasesNotFoundException {
 
         StringBuilder sbInternationalTotalUrl = new StringBuilder(100);
         sbInternationalTotalUrl.append(config.getBaseUrl())
@@ -182,21 +185,19 @@ public class InternationalClientImpl extends AbstractClient implements Internati
 
         List<InternationalTotal> internationalTotals = null;
 
-        switch (response.get().statusCode()) {
-            case INTERNAL_SERVER_CODE:
-                log.error(INTERNAL_SERVER_ERROR);
-                break;
-            case NOT_FOUND_CODE:
-                log.error(ENTRY_NOT_FOUND_ERROR);
-                break;
-            default:
-                internationalTotals = JSONUtils
-                        .convertFromJsonToList(response.get().body(),
-                                new TypeReference<List<InternationalTotal>>() {
-                        });
-                internationalTotals.forEach(total -> log.info(total.toString()));
-                break;
+        if (response.get().statusCode() == INTERNAL_SERVER_CODE) {
+            log.error(INTERNAL_SERVER_ERROR);
+            throw new InternationalCasesNotFoundException(
+                    "International totals not available"
+            );
+        } else {
+            internationalTotals = JSONUtils
+                    .convertFromJsonToList(response.get().body(),
+                            new TypeReference<List<InternationalTotal>>() {
+                    });
+            internationalTotals.forEach(total -> log.info(total.toString()));
         }
+
         response.join();
         return internationalTotals;
     }

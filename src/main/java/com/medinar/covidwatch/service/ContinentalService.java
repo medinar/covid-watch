@@ -35,7 +35,10 @@ public interface ContinentalService {
             boolean twoDaysAgo,
             boolean strict,
             boolean allowNull
-    ) throws InterruptedException, ExecutionException, IOException, ContinentalCasesNotFoundException;
+    ) throws InterruptedException, 
+            ExecutionException, 
+            IOException, 
+            ContinentalCasesNotFoundException;
 
     /**
      * Retrieves the list of totals of all continents
@@ -50,12 +53,16 @@ public interface ContinentalService {
      * @throws InterruptedException
      * @throws ExecutionException
      * @throws IOException
+     * @throws com.medinar.covidwatch.exception.ContinentalCasesNotFoundException
      */
     public abstract List<ContinentalTotal> getTotals(
             boolean yesterday,
             boolean twoDaysAgo,
             boolean strict,
             boolean allowNull
-    ) throws InterruptedException, ExecutionException, IOException;
+    ) throws InterruptedException, 
+            ExecutionException, 
+            IOException, 
+            ContinentalCasesNotFoundException;
 
 }

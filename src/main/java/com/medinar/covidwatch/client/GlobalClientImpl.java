@@ -37,7 +37,10 @@ public class GlobalClientImpl extends AbstractClient implements GlobalClient {
             boolean yesterday,
             boolean twoDaysAgo,
             boolean allowNull
-    ) throws InterruptedException, ExecutionException, IOException, GlobalCasesNotFoundException {
+    ) throws InterruptedException, 
+            ExecutionException, 
+            IOException, 
+            GlobalCasesNotFoundException {
 
         if (log.isDebugEnabled()) {
             log.debug("CovidApiConfig ::: {}", config.toString());

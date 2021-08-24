@@ -20,11 +20,15 @@ public interface GlobalService {
      * @throws InterruptedException
      * @throws ExecutionException
      * @throws IOException 
+     * @throws com.medinar.covidwatch.exception.GlobalCasesNotFoundException 
      */
     public abstract GlobalTotal getTotal(
             boolean yesterday,
             boolean twoDaysAgo,
             boolean allowNull
-    ) throws InterruptedException, ExecutionException, IOException, GlobalCasesNotFoundException;
+    ) throws InterruptedException, 
+            ExecutionException, 
+            IOException, 
+            GlobalCasesNotFoundException;
         
 }

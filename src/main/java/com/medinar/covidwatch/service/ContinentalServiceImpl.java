@@ -31,7 +31,10 @@ public class ContinentalServiceImpl implements ContinentalService {
             boolean twoDaysAgo,
             boolean strict,
             boolean allowNull
-    ) throws InterruptedException, ExecutionException, IOException, ContinentalCasesNotFoundException {
+    ) throws InterruptedException, 
+            ExecutionException, 
+            IOException, 
+            ContinentalCasesNotFoundException {
 
         Optional<Continent> oContinent = Arrays.asList(Continent.values()).stream()
                 .filter(c -> c.getValue().equalsIgnoreCase(continent))
@@ -58,7 +61,11 @@ public class ContinentalServiceImpl implements ContinentalService {
             boolean twoDaysAgo,
             boolean strict,
             boolean allowNull
-    ) throws InterruptedException, ExecutionException, IOException {
+    ) throws InterruptedException,
+            ExecutionException,
+            IOException,
+            ContinentalCasesNotFoundException {
+
         return client.getContinentalTotals(
                 yesterday,
                 twoDaysAgo,

@@ -27,7 +27,7 @@ public class GlobalServiceImpl implements GlobalService {
             ExecutionException,
             IOException,
             GlobalCasesNotFoundException {
-        
+
         return client.getGlobalTotal(yesterday, twoDaysAgo, allowNull);
     }
 

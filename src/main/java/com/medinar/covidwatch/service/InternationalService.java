@@ -24,13 +24,18 @@ public interface InternationalService {
      * @throws InterruptedException
      * @throws ExecutionException
      * @throws IOException
+     * @throws
+     * com.medinar.covidwatch.exception.InternationalCasesNotFoundException
      */
     public abstract List<InternationalTotal> getTotals(
             boolean yesterday,
             boolean twoDaysAgo,
             String sortBy,
             boolean allowNull
-    ) throws InterruptedException, ExecutionException, IOException;
+    ) throws InterruptedException,
+            ExecutionException,
+            IOException,
+            InternationalCasesNotFoundException;
 
     /**
      * Retrieves the total cases of for the given country
@@ -46,6 +51,8 @@ public interface InternationalService {
      * @throws InterruptedException
      * @throws ExecutionException
      * @throws IOException
+     * @throws
+     * com.medinar.covidwatch.exception.InternationalCasesNotFoundException
      */
     public abstract InternationalTotal getTotal(
             String country,
@@ -53,7 +60,10 @@ public interface InternationalService {
             boolean twoDaysAgo,
             boolean strict,
             boolean allowNull
-    ) throws InterruptedException, ExecutionException, IOException, InternationalCasesNotFoundException;
+    ) throws InterruptedException,
+            ExecutionException,
+            IOException,
+            InternationalCasesNotFoundException;
 
     /* 
      * Retrieves the list of totals in different countries for the given continent
@@ -74,6 +84,9 @@ public interface InternationalService {
             boolean twoDaysAgo,
             boolean strict,
             boolean allowNull
-    ) throws InterruptedException, ExecutionException, IOException;
+    ) throws InterruptedException,
+            ExecutionException,
+            IOException,
+            InternationalCasesNotFoundException;
 
 }
