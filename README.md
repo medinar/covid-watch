@@ -14,11 +14,11 @@ The application uses the standard MVC architecture. The controller layer consist
 ### Features
 
 - The app utilizes Open Disease Data API for Covid-19 data which is updated every 10 minutes
-- The Home page that displays details regarding worldwide Covid-19 cases
+- A Home page that displays details regarding worldwide Covid-19 cases
 - A list of Continents that links to a specific Continent page
-- Continent Page that displays details regarding Covid-19 infections for that particular continents
-- Continent Page also displays a table of countries with its corresponding details
-- The Country Page displays details such as total cases, new cases, active cases, etc
+- A Continent Page that displays details regarding Covid-19 infections for that particular continent
+- The Continent Page also displays a table of countries with its corresponding details
+- A Country Page that displays details such as total cases, new cases, active cases, etc
 
 ### Screens
 
@@ -52,7 +52,7 @@ The application uses the standard MVC architecture. The controller layer consist
 
 ### Exception Handling
 
-Exceptions are being handled inside GlobalExceptionHandler class which uses the Spring's  @ControllerAdvice annotation to capture exceptions in the application and to be handled accordingly.
+Exceptions are being handled inside GlobalExceptionHandler class which uses the Spring's @ControllerAdvice annotation to capture exceptions in the application and to be taken accordingly.
 
 ### Project Structure
 
@@ -84,7 +84,7 @@ The Test Package contains all tests that are used in this project such as the Un
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
 
 ### Prerequisites
 
