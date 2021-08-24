@@ -8,12 +8,10 @@ import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import static org.junit.Assert.*;
-import org.junit.Rule;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.rules.ExpectedException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import static org.mockito.Mockito.when;
@@ -71,15 +69,13 @@ public class ContinentalServiceImplTest {
      * @throws java.lang.Exception
      */
     @Test
-    public void testGetContinentalTotalUnhappyPath() throws Exception {
+    public void testContinentalCasesNotFoundException() throws Exception {
         System.out.println("getContinentalTotal");
         String continent = "Pangea";
         String expectedMessage = "Continent not found: " + continent;
 
         Exception exception = assertThrows(ContinentalCasesNotFoundException.class, () -> {
-            Optional<ContinentalTotal> result = service
-                    .getTotal(continent, false, false, true, false);
-
+            service.getTotal(continent, false, false, true, false);
         });
 
         String actualMessage = exception.getMessage();

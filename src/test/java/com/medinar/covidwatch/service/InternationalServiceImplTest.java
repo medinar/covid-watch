@@ -61,6 +61,7 @@ public class InternationalServiceImplTest {
 
     /**
      * Test of getTotal method, of class InternationalServiceImpl.
+     *
      * @throws java.lang.Exception
      */
     @Test
@@ -83,6 +84,7 @@ public class InternationalServiceImplTest {
 
     /**
      * Test of getTotalsbyContinent method, of class InternationalServiceImpl.
+     *
      * @throws java.lang.Exception
      */
     @Test

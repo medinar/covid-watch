@@ -28,6 +28,7 @@ public class GlobalControllerIT {
 
     /**
      * Test of getTotal method, of class GlobalController.
+     * @throws java.lang.Exception
      */
     @Test
     public void testGetGlobalTotalHappyPath() throws Exception {
