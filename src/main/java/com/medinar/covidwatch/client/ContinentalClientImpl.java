@@ -10,7 +10,7 @@ import static com.medinar.covidwatch.constant.Constants.STRICT_REQ_PARAM;
 import static com.medinar.covidwatch.constant.Constants.TWODAYSAGO_REQ_PARAM;
 import static com.medinar.covidwatch.constant.Constants.YESTERDAY_REQ_PARAM;
 import com.medinar.covidwatch.domain.ContinentalTotal;
-import com.medinar.covidwatch.exception.ContinentNotFoundException;
+import com.medinar.covidwatch.exception.ContinentalCasesNotFoundException;
 import com.medinar.covidwatch.utility.JSONUtils;
 import java.io.IOException;
 import java.net.URI;
@@ -43,7 +43,7 @@ public class ContinentalClientImpl extends AbstractClient implements Continental
             boolean twoDaysAgo,
             boolean strict,
             boolean allowNull
-    ) throws InterruptedException, ExecutionException, IOException, ContinentNotFoundException {
+    ) throws InterruptedException, ExecutionException, IOException, ContinentalCasesNotFoundException {
 
         StringBuilder sbContinentalTotalUrl = new StringBuilder(100);
         sbContinentalTotalUrl.append(config.getBaseUrl())
@@ -73,7 +73,7 @@ public class ContinentalClientImpl extends AbstractClient implements Continental
         Optional<ContinentalTotal> continentalTotal;
         if (response.get().statusCode() == INTERNAL_SERVER_CODE) {
             log.error(INTERNAL_SERVER_ERROR);
-            throw new ContinentNotFoundException("Continental total not available");
+            throw new ContinentalCasesNotFoundException("Continental total not available");
         } else {
             continentalTotal = continentalTotals.stream()
                     .filter(ct -> ct.getContinent().equalsIgnoreCase(continent))

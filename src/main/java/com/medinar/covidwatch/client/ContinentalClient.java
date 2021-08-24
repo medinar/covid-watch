@@ -1,7 +1,7 @@
 package com.medinar.covidwatch.client;
 
 import com.medinar.covidwatch.domain.ContinentalTotal;
-import com.medinar.covidwatch.exception.ContinentNotFoundException;
+import com.medinar.covidwatch.exception.ContinentalCasesNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
@@ -27,7 +27,7 @@ public interface ContinentalClient {
      * @throws InterruptedException
      * @throws ExecutionException
      * @throws IOException
-     * @throws com.medinar.covidwatch.exception.ContinentNotFoundException
+     * @throws com.medinar.covidwatch.exception.ContinentalCasesNotFoundException
      */
     public abstract Optional<ContinentalTotal> getContinentalTotal(
             String continent,
@@ -35,7 +35,7 @@ public interface ContinentalClient {
             boolean twoDaysAgo,
             boolean strict,
             boolean allowNull
-    ) throws InterruptedException, ExecutionException, IOException, ContinentNotFoundException;
+    ) throws InterruptedException, ExecutionException, IOException, ContinentalCasesNotFoundException;
 
     /**
      * Retrieves the list of totals of all continents

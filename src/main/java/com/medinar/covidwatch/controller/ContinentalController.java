@@ -2,7 +2,7 @@ package com.medinar.covidwatch.controller;
 
 import com.medinar.covidwatch.domain.ContinentalTotal;
 import com.medinar.covidwatch.domain.InternationalTotal;
-import com.medinar.covidwatch.exception.ContinentNotFoundException;
+import com.medinar.covidwatch.exception.ContinentalCasesNotFoundException;
 import com.medinar.covidwatch.service.ContinentalService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,7 +94,7 @@ public class ContinentalController {
                     "IOException occured", 
                     ex
             );
-        } catch (ContinentNotFoundException ex) {
+        } catch (ContinentalCasesNotFoundException ex) {
             log.error("ContinentNotFoundException handler executed", ex);
             throw new ResponseStatusException(NOT_FOUND, continent, ex);
         }
