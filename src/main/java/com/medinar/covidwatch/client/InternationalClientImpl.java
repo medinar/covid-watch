@@ -123,7 +123,11 @@ public class InternationalClientImpl extends AbstractClient implements Internati
         CompletableFuture<HttpResponse<String>> response = HTTP_CLIENT
                 .sendAsync(request, HttpResponse.BodyHandlers.ofString());
 
-        response.thenAccept(res -> log.info(res.toString()));
+        response.thenAccept(res -> log.info(
+                "Response: [Status Code: {}, URI: {}",
+                res.statusCode(),
+                res.request().uri())
+        );
 
         List<InternationalTotal> internationalTotals = JSONUtils
                 .convertFromJsonToList(response.get().body(),
@@ -144,9 +148,11 @@ public class InternationalClientImpl extends AbstractClient implements Internati
                     .equalsIgnoreCase(continent)
                     ).collect(Collectors.toList());
 
-            internationalTotalsByContinent.forEach(
-                    total -> log.info(total.toString())
-            );
+            if (log.isDebugEnabled()) {
+                internationalTotalsByContinent.forEach(
+                        total -> log.debug(total.toString())
+                );
+            }
         }
 
         response.join();

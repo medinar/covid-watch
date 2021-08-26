@@ -147,5 +147,3 @@ IDE (Developed using Netbeans 12.1) or STS for Eclipse or IntelliJ
 ## Author
 
 - **Rommel D. Medina** - [Profile: medinar](https://github.com/medinar)
-
-## 
