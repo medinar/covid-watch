@@ -1,27 +1,30 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <title>Contact | Covid Watch</title>
-    <link rel="icon" type="image/png" href="assets/icons8-virus-48.png">
+    <head>
+        <title>Contact | Covid Watch</title>
+        <link rel="icon" type="image/png" href="assets/icons8-virus-48.png">
     <div th:replace="fragments/header :: header"></div>
 </head>
 
 <body>
-    <th:block th:replace="fragments/navigation :: navigation"></th:block>
-    <section id="main">
-        <div class="container mb-3 mt-3">
-            <div class="d-flex flex-row">
-                <div class="p-2 px-3"><img src="assets/avatar-mhel.png" alt="Rommel Medina" class="avatar"></div>
-                <div class="p-2">
-                    <h2>Rommel Medina</h2>
+<th:block th:replace="fragments/navigation :: navigation"></th:block>
+<div class="container mb-3 mt-3 h-100">
+    <div class="row h-100">
+        <div class="col">
+            <div class="media py-5">
+                <img class="mr-3 avatar" src="assets/avatar-mhel.png" alt="Rommel Medina Avatar">
+                <div class="media-body">
+                    <h4 class="mt-0">Rommel Medina</h4>
                     <p class="text-muted">An avid coffee drinker and a software developer who's been working in the field for over 10 years.<br> 
                         I’m passionate about creating quality products that meet all of the customer’s needs.
                     </p>
                 </div>
             </div>
+        </div>
+        <div class="col">
             <div class="col-lg-6 d-flex align-items-stretch">
-                <div class="info-wrap w-100 p-5">
+                <div class="info-wrap w-100 py-5">
                     <h3 class="mb-4">Let's Talk</h3>
                     <div class="dbox w-100 d-flex align-items-start">
                         <div class="icon d-flex align-items-center justify-content-center">
@@ -60,7 +63,8 @@
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</div>
 <th:block th:replace="fragments/footer :: footer"></th:block>
 <th:block th:include="fragments/scripts :: scripts"></th:block>
 </body>
